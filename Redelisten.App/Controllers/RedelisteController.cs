@@ -9,11 +9,13 @@ public class RedelisteController : ControllerBase
 
     private readonly IUserRepo userRepo;
     private readonly IRedelisteRepo redelisteRepo;
+    private readonly IMeldungRepo meldungRepo;
 
-    public RedelisteController(IUserRepo userRepo, IRedelisteRepo redelisteRepo)
+    public RedelisteController(IUserRepo userRepo, IRedelisteRepo redelisteRepo, IMeldungRepo meldungRepo)
     {
         this.userRepo = userRepo;
         this.redelisteRepo = redelisteRepo;
+        this.meldungRepo = meldungRepo;
     }
 
     [HttpPost("create")]
@@ -32,12 +34,21 @@ public class RedelisteController : ControllerBase
         Redeliste? redeliste = redelisteRepo.Retrieve(name);
         if (redeliste is null)
             return NotFound();
-        return Ok(new { redeliste.Name });
+
+        List<User> meldungen = LoadMeldungen(redeliste);
+        
+        return Ok(new RetrieveRedelisteDto(redeliste, meldungen));
     }
 
     [HttpDelete("{name}")]
     public IActionResult Delete(string name)
     {
         return redelisteRepo.Delete(name) ? Ok() : NotFound();
+    }
+    private List<User> LoadMeldungen(Redeliste redeliste)
+    {
+        var meldungen = meldungRepo.Retrieve(redeliste.Name);
+        IEnumerable<User> users = meldungen.Select(meldung => userRepo.Retrieve(meldung.UserID)).OfType<User>();
+        return users.ToList();
     }
 }

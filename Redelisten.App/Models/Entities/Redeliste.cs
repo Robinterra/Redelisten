@@ -1,6 +1,3 @@
-using System.Text.Json.Serialization;
-using Redelisten.Data.Helper;
-
 public class Redeliste
 {
     public string Name { get; set; }

@@ -6,6 +6,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IUserRepo, UserRepo>();
 builder.Services.AddSingleton<IRedelisteRepo, RedelisteRepo>();
+builder.Services.AddSingleton<IMeldungRepo, MeldungRepo>();
 
 var app = builder.Build();
 
