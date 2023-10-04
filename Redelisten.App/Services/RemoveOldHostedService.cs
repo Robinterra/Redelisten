@@ -18,7 +18,7 @@ public class RemoveOldHostedService : IHostedService
         return Task.CompletedTask;
     }
 
-    private async void RemoveOldEntries(object? state)
+    private void RemoveOldEntries(object? state)
     {
         userRepo.LifetimeDelete();
     }
