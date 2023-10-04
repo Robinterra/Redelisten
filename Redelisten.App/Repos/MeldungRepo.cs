@@ -1,6 +1,6 @@
 public class MeldungRepo : IMeldungRepo
 {
-    private Dictionary<string, List<Meldung>> Meldungen;
+    private Dictionary<string, List<Meldung>> Meldungen = new Dictionary<string, List<Meldung>>();
 
     private bool Contains(Meldung meldung)
     {
