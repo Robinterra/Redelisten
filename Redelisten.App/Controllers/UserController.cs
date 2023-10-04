@@ -18,8 +18,18 @@ public class UserController : ControllerBase
     {
         User user = this.userRepo.Create(createUserDto);
 
-        this.Response.Cookies.Append("test", user.Id.ToString());
+        this.Response.Cookies.Append("test", user.Token.ToString());
 
         return this.Ok(user);
+    }
+
+    [HttpGet("retrieve")]
+    public IActionResult Retrieve(Guid id)
+    {
+        User? user = this.userRepo.Retrieve(id);
+
+        if (user is null)
+            return NotFound();
+        return Ok(user);
     }
 }
