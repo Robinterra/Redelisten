@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IUserRepo, UserRepo>();
+builder.Services.AddSingleton<IRedelisteRepo, RedelisteRepo>();
 
 var app = builder.Build();
 
