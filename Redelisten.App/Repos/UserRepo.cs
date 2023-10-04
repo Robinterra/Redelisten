@@ -1,6 +1,6 @@
 public class UserRepo : IUserRepo
 {
-
+    private int counter = 0;
     public Dictionary<Guid, User> Users { get; set; } = new Dictionary<Guid, User>();
 
     public UserRepo()
@@ -10,11 +10,16 @@ public class UserRepo : IUserRepo
 
     public User Create(CreateUserDto createUserDto)
     {
-        User user = new User(createUserDto);
+        User user = new User(createUserDto, counter++);
 
-        this.Users.Add(user.Id, user);
+        this.Users.Add(user.Token, user);
 
         return user;
+    }
+
+    public User? Retrieve(Guid id)
+    {
+        return Users.TryGetValue(id, out var value) ? value: null;
     }
 
     public void LifetimeDelete()
@@ -30,7 +35,7 @@ public class UserRepo : IUserRepo
         
         foreach (User user in toDelete)
         {
-            Users.Remove(user.Id);
+            Users.Remove(user.Token);
         }
     }
 
