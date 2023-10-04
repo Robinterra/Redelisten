@@ -1,7 +1,7 @@
 public class UserRepo : IUserRepo
 {
     private int counter = 0;
-    public Dictionary<Guid, User> Users { get; set; } = new Dictionary<Guid, User>();
+    public Dictionary<int, User> Users { get; set; } = new Dictionary<int, User>();
 
     public UserRepo()
     {
@@ -12,12 +12,12 @@ public class UserRepo : IUserRepo
     {
         User user = new User(createUserDto, counter++);
 
-        this.Users.Add(user.Token, user);
+        this.Users.Add(user.Id, user);
 
         return user;
     }
 
-    public User? Retrieve(Guid id)
+    public User? Retrieve(int id)
     {
         return Users.TryGetValue(id, out var value) ? value: null;
     }
@@ -32,10 +32,10 @@ public class UserRepo : IUserRepo
                 toDelete.Add(user);
             }
         }
-        
+        //TODO: Meldungen und Räume der Nutzer löschen
         foreach (User user in toDelete)
         {
-            Users.Remove(user.Token);
+            Users.Remove(user.Id);
         }
     }
 

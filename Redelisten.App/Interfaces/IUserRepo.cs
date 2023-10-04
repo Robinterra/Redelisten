@@ -1,6 +1,6 @@
 public interface IUserRepo
 {
     User Create(CreateUserDto createUserDto);
-    User? Retrieve(Guid id);
+    User? Retrieve(int id);
     void LifetimeDelete();
 }

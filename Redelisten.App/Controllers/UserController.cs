@@ -23,13 +23,13 @@ public class UserController : ControllerBase
         return this.Ok(user);
     }
 
-    [HttpGet("retrieve")]
-    public IActionResult Retrieve(Guid id)
+    [HttpGet("{id}/retrieve")]
+    public IActionResult Retrieve(int id)
     {
         User? user = this.userRepo.Retrieve(id);
 
         if (user is null)
             return NotFound();
-        return Ok(user);
+        return Ok(new RetrieveUserDto(user));
     }
 }

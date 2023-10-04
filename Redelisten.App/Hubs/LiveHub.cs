@@ -27,7 +27,7 @@ public class LiveHub : Hub
         //string username = userAuthService.GetUsername();
         string connectionId = this.Context.ConnectionId;
 
-        LivestreamSubscribe subscribe = new LivestreamSubscribe(connectionId, "HIER KOMMT RAUMID");
+        LivestreamSubscribe subscribe = new LivestreamSubscribe(connectionId, "HIER KOMMT REDELISTENAME");
         this.livestreamSubscribeRepo.Add(subscribe);
 
         return base.OnConnectedAsync();

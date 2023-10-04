@@ -2,7 +2,7 @@ using Microsoft.VisualBasic.CompilerServices;
 
 public class Meldung
 {
-    public Guid UserID { get; set; }
+    public int UserID { get; set; }
     public string RedelistenName { get; set; }
 
     public Meldung(CreateMeldungDto createMeldungDto)

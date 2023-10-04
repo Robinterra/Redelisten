@@ -4,11 +4,17 @@ public class RemoveOldHostedService : IHostedService
 {
     private IUserRepo userRepo;
 
+    private IRedelisteRepo redelisteRepo;
+
+    private IMeldungRepo meldungRepo;
+
     private Timer? timer;
 
-    public RemoveOldHostedService(IUserRepo userRepo)
+    public RemoveOldHostedService(IUserRepo userRepo, IRedelisteRepo redelisteRepo, IMeldungRepo meldungRepo)
     {
         this.userRepo = userRepo;
+        this.redelisteRepo = redelisteRepo;
+        this.meldungRepo = meldungRepo;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
