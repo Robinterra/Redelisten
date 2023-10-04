@@ -9,11 +9,13 @@ public class RedelisteController : ControllerBase
 
     private readonly IUserRepo userRepo;
     private readonly IRedelisteRepo redelisteRepo;
+    private readonly ILiveService<LiveHub> hubContext;
 
-    public RedelisteController(IUserRepo userRepo, IRedelisteRepo redelisteRepo)
+    public RedelisteController(IUserRepo userRepo, IRedelisteRepo redelisteRepo, ILiveService<LiveHub> hubContext)
     {
         this.userRepo = userRepo;
         this.redelisteRepo = redelisteRepo;
+        this.hubContext = hubContext;
     }
 
     [HttpPost("create")]
@@ -38,6 +40,8 @@ public class RedelisteController : ControllerBase
     [HttpDelete("{name}")]
     public IActionResult Delete(string name)
     {
+        this.hubContext.Send("RedelisteDeleted", new { name });
+
         return redelisteRepo.Delete(name) ? Ok() : NotFound();
     }
 }

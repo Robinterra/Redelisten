@@ -9,7 +9,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IUserRepo, UserRepo>();
 builder.Services.AddSingleton<IRedelisteRepo, RedelisteRepo>();
 
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<ILivestreamSubscribeRepo, LivestreamSubscribeRepo>();
+
 builder.Services.AddHostedService<RemoveOldHostedService>();
+
+ServiceDescriptor liveService = ServiceDescriptor.Singleton(typeof(ILiveService<>), typeof(LiveService<>));
+builder.Services.Add(liveService);
 
 var app = builder.Build();
 
@@ -24,6 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.MapHub<LiveHub>("/LiveUserTask");
 
 app.MapControllerRoute(
     name: "default",
