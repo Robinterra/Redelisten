@@ -17,6 +17,11 @@ public class UserRepo : IUserRepo
         return user;
     }
 
+    public User? Retrieve(Guid id)
+    {
+        return Users.TryGetValue(id, out var value) ? value: null;
+    }
+
     public void LifetimeDelete()
     {
         List<User> toDelete = new List<User>();
