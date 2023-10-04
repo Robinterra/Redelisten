@@ -17,4 +17,21 @@ public class UserRepo : IUserRepo
         return user;
     }
 
+    public void LifetimeDelete()
+    {
+        List<User> toDelete = new List<User>();
+        foreach (User user in Users.Values)
+        {
+            if(user.CreatedAt.AddDays(1) < DateTime.UtcNow)
+            {
+                toDelete.Add(user);
+            }
+        }
+        
+        foreach (User user in toDelete)
+        {
+            Users.Remove(user.Id);
+        }
+    }
+
 }

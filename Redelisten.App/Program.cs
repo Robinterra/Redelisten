@@ -1,3 +1,5 @@
+using Redelisten.App.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IUserRepo, UserRepo>();
+
+builder.Services.AddHostedService<RemoveOldHostedService>();
 
 var app = builder.Build();
 
