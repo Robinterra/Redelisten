@@ -1,6 +1,11 @@
+using System.Net;
 using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
 using ApiService;
+using Microsoft.AspNetCore.Http.Connections.Client;
+using Microsoft.AspNetCore.SignalR.Client;
+
+//using Microsoft.AspNet.SignalR.Client;
 using MyApiService;
 
 public class RedelisteService
@@ -32,25 +37,89 @@ public class RedelisteService
         ApiResponse response = (await this.ApiClient.PostAsync<ApiResponse, dynamic>(new{name=ConnectionInfo.User}, "User/Create"))!;
         if (response.HttpCode == 409) CriticalError("User already exists");
 
-        Console.WriteLine(response.Status);
-        Console.WriteLine(response.HttpCode);
-
         HttpResponseMessage message = await ApiClient.client.PostAsJsonAsync("Redeliste/Create", new{name=ConnectionInfo.Redeliste});
-        //response = (await this.ApiClient.PostAsync<ApiResponse, dynamic>(new{name=ConnectionInfo.Redeliste}, "Redeliste/Create"))!;
-        Console.WriteLine(message.StatusCode);
-        //Console.WriteLine(response.HttpCode);
-        Console.WriteLine(await message.Content.ReadAsStringAsync());
-        
+        if (message.StatusCode == HttpStatusCode.Created) Console.WriteLine("Du bist Moderator");
+        if (message.StatusCode == HttpStatusCode.OK) Console.WriteLine("Redeliste Erfolgreich beigetreten");
+
+        await this.WebSocketStart();
+    }
+
+    private async Task WebSocketStart()
+    {
+        HubConnectionBuilder builder = new HubConnectionBuilder();
+        builder.WithAutomaticReconnect();
+        builder.WithUrl($"{this.ConnectionInfo.Host}/LiveInfos", InitSignalrConnection);
+
+        HubConnection connection = builder.Build();
+
+        await connection.StartAsync();
+
+        connection.On<MeldungReport>("NeueMeldung", param => {
+            Console.WriteLine($"Der User {param.User} wurde mit auf die Redeliste aufgenommen");
+            Console.Write("> ");
+        });
+
+        connection.On<MeldungReport>("CurrentMeldung", param => {
+            Console.WriteLine($"Der User {param.User} ist jetzt dran");
+            Console.Write("> ");
+        });
+
+        connection.On<string>("KeineMeldung", param => {
+            Console.WriteLine($"Es gibt keine weiteren Meldungen");
+            Console.Write("> ");
+        });
+    }
+
+    private void InitSignalrConnection(HttpConnectionOptions options)
+    {
+        if (this.ConnectionInfo.IgnoreCertificateErrors)
+        {
+            options.HttpMessageHandlerFactory = (x) => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+            };
+        }
+
+        Cookie? token = this.ApiClient.handler.CookieContainer.GetCookies(new Uri(this.ConnectionInfo.Host)).FirstOrDefault(t=>t.Name == "token");
+        if (token is null) return;
+        options.Cookies.Add(token);
     }
 
     public async Task Run()
     {
         await this.StartConnection();
+        Console.WriteLine("Mit q verlassen, mit m melden und mit n next person (nur moderator)");
 
         while (true)
         {
-
+            Console.Write("> ");
+            string? cmd = Console.ReadLine();
+            if (cmd == "m") await Melden();
+            if (cmd == "q") break;
+            if (cmd == "n") await Nächster();
         }
     }
 
+    private async Task Nächster()
+    {
+        HttpResponseMessage message = await ApiClient.client.PostAsync($"Redeliste/{this.ConnectionInfo.Redeliste}/Meldung/Done", null);
+        if (message.StatusCode == HttpStatusCode.OK)
+        {
+            return;
+        }
+        string msg = await message.Content.ReadAsStringAsync();
+        //Console.WriteLine(msg);
+    }
+
+    private async Task Melden()
+    {
+        HttpResponseMessage message = await ApiClient.client.PostAsync($"Redeliste/{this.ConnectionInfo.Redeliste}/Meldung", null);
+        if (message.StatusCode == HttpStatusCode.OK)
+        {
+            Console.WriteLine("Erfolgreich gemeldet");
+            return;
+        }
+        string msg = await message.Content.ReadAsStringAsync();
+        Console.WriteLine(msg);
+    }
 }

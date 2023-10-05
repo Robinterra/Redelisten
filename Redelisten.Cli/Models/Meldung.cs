@@ -1,19 +1,15 @@
-using Microsoft.VisualBasic.CompilerServices;
-
 public class Meldung
 {
     public int UserID { get; set; }
-    public string RedelistenName { get; set; }
+    public string RedelistenName { get; set; } = "";
 
     public int Order { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public Meldung(CreateMeldungDto createMeldungDto, int newOrder)
+    public Meldung()
     {
-        UserID = createMeldungDto.Moderator.Id;
-        RedelistenName = createMeldungDto.RedelistenName;
-        Order = newOrder;
+
     }
 
     public static bool operator ==(Meldung lhs, Meldung rhs)

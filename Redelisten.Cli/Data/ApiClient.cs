@@ -20,6 +20,7 @@ namespace MyApiService
         public HttpClient client;
 
         private string? apiKey;
+        public HttpClientHandler handler;
 
         private event CheckZertifkat? checkCertEasy;
 
@@ -151,6 +152,7 @@ namespace MyApiService
 
         public MyApiClient(string baseAdress, string apiPath = "")
         {
+            this.handler = null!;
             this.baseadress = new Uri(baseAdress);
             this.ApiPath = apiPath;
 
@@ -226,6 +228,7 @@ namespace MyApiService
         private HttpClient BuildHttpClient()
         {
             HttpClientHandler handler = this.BuildHandler();
+            this.handler = handler;
 
             HttpClient client = new HttpClient(handler);
 

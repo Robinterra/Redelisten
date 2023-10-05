@@ -1,3 +1,5 @@
+using Redelisten.App.Interfaces;
+using Redelisten.App.Repos;
 using Redelisten.App.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IUserRepo, UserRepo>();
 builder.Services.AddSingleton<IRedelisteRepo, RedelisteRepo>();
 builder.Services.AddSingleton<IMeldungRepo, MeldungRepo>();
+builder.Services.AddSingleton<IMeldungHistoryRepo, MeldungHistoryRepo>();
 
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<ILivestreamSubscribeRepo, LivestreamSubscribeRepo>();
@@ -31,7 +34,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.MapHub<LiveHub>("/LiveUserTask");
+app.MapHub<LiveHub>("/LiveInfos");
 
 app.MapControllerRoute(
     name: "default",

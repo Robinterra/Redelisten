@@ -50,8 +50,10 @@ public class MeldungController : ControllerBase
         Meldung? result = meldungRepo.Create(new(user, redelisteName));
         if (result is null) return BadRequest("Meldung konnte nicht erstellt werden");
 
+        List<Meldung> meldungen = meldungRepo.Retrieve(redelisteName);
+        bool isok = meldungen.Count == 1 ? hubContext.Send("CurrentMeldung", new MeldungReport(user.Name)) : hubContext.Send("NeueMeldung", new MeldungReport(user.Name));
+
         IncreaseHistoryCount(user.Id, redelisteName);
-        hubContext.Send("NeueMeldung", result);
 
         return Ok(result);
     }
@@ -84,7 +86,7 @@ public class MeldungController : ControllerBase
             return Ok(null);
         }
 
-        hubContext.Send("CurrentMeldung", nextMeldung);
+        hubContext.Send("CurrentMeldung", new MeldungReport(user.Name));
         return Ok(nextMeldung);
     }
 

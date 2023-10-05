@@ -1,9 +1,10 @@
-﻿using Redelisten.App.Models.Dtos;
+﻿using Redelisten.App.Interfaces;
+using Redelisten.App.Models.Dtos;
 using Redelisten.App.Models.Entities;
 
 namespace Redelisten.App.Repos;
 
-public class MeldungHistoryRepo
+public class MeldungHistoryRepo : IMeldungHistoryRepo
 {
     private List<MeldungHistory> MeldungHistories = new List<MeldungHistory>();
 

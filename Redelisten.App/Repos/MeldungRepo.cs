@@ -6,8 +6,11 @@ public class MeldungRepo : IMeldungRepo
 
     private bool Contains(Meldung meldung)
     {
-        return Meldungen.ContainsKey(meldung.RedelistenName)
-               && Meldungen[meldung.RedelistenName].Contains(meldung);
+        if (!Meldungen.ContainsKey(meldung.RedelistenName)) return false;
+        if (Meldungen[meldung.RedelistenName].Count == 0) return false;
+        if (!Meldungen[meldung.RedelistenName].Any(t=>t == meldung)) return false;
+
+        return true;
     }
 
     private List<Meldung> NewOrdering(List<Meldung> meldungen)
@@ -24,14 +27,18 @@ public class MeldungRepo : IMeldungRepo
 
     public Meldung? Create(CreateMeldungDto createMeldungDto)
     {
-        List<Meldung> meldungen = this.Meldungen[createMeldungDto.RedelistenName];
-        meldungen = NewOrdering(meldungen);
+        List<Meldung>? meldungen = null;
+        if (!Meldungen.TryGetValue(createMeldungDto.RedelistenName, out meldungen))
+        {
+            meldungen = new List<Meldung>();
+            Meldungen.Add(createMeldungDto.RedelistenName, meldungen);
+        }
 
-        int maxOrder = meldungen.Max(meldung => meldung.Order);
+        int maxOrder = meldungen.Count == 0 ? 0 : meldungen.Max(meldung => meldung.Order);
         int newOrder = maxOrder + 1;
 
         Meldung meldung = new Meldung(createMeldungDto, newOrder);
-        if (!Contains(meldung)) return null;
+        if (this.Contains(meldung)) return null;
 
         Meldungen[meldung.RedelistenName].Add(meldung);
 
