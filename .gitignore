@@ -6,3 +6,5 @@ riderModule.iml
 *.tar
 .idea/
 *.sln
+
+.fake

@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "run-script-os": "^1.1.6",
+    "ry": "^0.1.0"
+  }
+}
