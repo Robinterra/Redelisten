@@ -2,5 +2,6 @@ public interface IRedelisteRepo
 {
     Redeliste? Create(CreateRedelisteDto createRedelisteDto);
     Redeliste? Retrieve(string name);
-    bool Delete(string name);
+    Redeliste? Delete(string name);
+    List<Redeliste> Delete(List<User> moderator);
 }

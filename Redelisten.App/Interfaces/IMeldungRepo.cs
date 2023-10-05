@@ -2,5 +2,7 @@ public interface IMeldungRepo
 {
     Meldung? Create(CreateMeldungDto createMeldungDto);
     List<Meldung> Retrieve(string RedelistenName);
+    bool Delete(List<User> users);
     bool Delete(Meldung meldung);
+    bool DeleteFromRedeliste(string nameRedeliste);
 }

@@ -47,7 +47,7 @@ public class RedelisteController : ControllerBase
     {
         this.hubContext.Send("RedelisteDeleted", new { name });
 
-        return redelisteRepo.Delete(name) ? Ok() : NotFound();
+        return redelisteRepo.Delete(name) is not null ? Ok() : NotFound();
     }
     private List<User> LoadMeldungen(Redeliste redeliste)
     {

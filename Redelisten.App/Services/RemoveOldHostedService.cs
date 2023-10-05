@@ -26,7 +26,14 @@ public class RemoveOldHostedService : IHostedService
 
     private void RemoveOldEntries(object? state)
     {
-        userRepo.LifetimeDelete();
+        List<User> toDelete = userRepo.UsersToDelete();
+        meldungRepo.Delete(toDelete);
+        List<Redeliste> deletedRedelisten = redelisteRepo.Delete(toDelete);
+        foreach (Redeliste redeliste in deletedRedelisten)
+        {
+            meldungRepo.DeleteFromRedeliste(redeliste.Name);
+        }
+        userRepo.Delete(toDelete);
     }
 
     public Task StopAsync(CancellationToken cancellationToken)

@@ -22,7 +22,7 @@ public class UserRepo : IUserRepo
         return Users.TryGetValue(id, out var value) ? value: null;
     }
 
-    public void LifetimeDelete()
+    public List<User> UsersToDelete()
     {
         List<User> toDelete = new List<User>();
         foreach (User user in Users.Values)
@@ -32,11 +32,16 @@ public class UserRepo : IUserRepo
                 toDelete.Add(user);
             }
         }
-        //TODO: Meldungen und Räume der Nutzer löschen
-        foreach (User user in toDelete)
-        {
-            Users.Remove(user.Id);
-        }
+        return toDelete;
     }
 
+    public bool Delete(List<User> toDelete)
+    {
+        bool result = false;
+        foreach (User user in toDelete)
+        {
+             result = Users.Remove(user.Id);
+        }
+        return result;
+    }
 }
