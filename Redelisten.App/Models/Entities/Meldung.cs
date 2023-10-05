@@ -5,6 +5,8 @@ public class Meldung
     public int UserID { get; set; }
     public string RedelistenName { get; set; }
 
+    public int Order { get; set; }
+
     public Meldung(CreateMeldungDto createMeldungDto)
     {
         UserID = createMeldungDto.Moderator.Id;
