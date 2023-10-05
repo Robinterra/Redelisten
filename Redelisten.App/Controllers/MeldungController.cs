@@ -50,6 +50,7 @@ public class MeldungController : ControllerBase
         Meldung? result = meldungRepo.Create(new(user, redelisteName));
         if (result is null) return BadRequest("Meldung konnte nicht erstellt werden");
 
+        IncreaseHistoryCount(user.Id, redelisteName);
         hubContext.Send("NeueMeldung", result);
 
         return Ok(result);

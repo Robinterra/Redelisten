@@ -9,13 +9,30 @@ public class MeldungRepo : IMeldungRepo
         return Meldungen.ContainsKey(meldung.RedelistenName)
                && Meldungen[meldung.RedelistenName].Contains(meldung);
     }
-    
+
+    private List<Meldung> NewOrdering(List<Meldung> meldungen)
+    {
+        List<Meldung> result = meldungen.OrderByDescending(meldung => meldung.Order).ToList();
+
+        for (int i = 0; i < result.Count; i++)
+        {
+            result[i].Order = i;
+        }
+
+        return result;
+    }
+
     public Meldung? Create(CreateMeldungDto createMeldungDto)
     {
-        Meldung meldung = new Meldung(createMeldungDto);
-        if (!Contains(meldung))
-            return null;
-        
+        List<Meldung> meldungen = this.Meldungen[createMeldungDto.RedelistenName];
+        meldungen = NewOrdering(meldungen);
+
+        int maxOrder = meldungen.Max(meldung => meldung.Order);
+        int newOrder = maxOrder + 1;
+
+        Meldung meldung = new Meldung(createMeldungDto, newOrder);
+        if (!Contains(meldung)) return null;
+
         Meldungen[meldung.RedelistenName].Add(meldung);
 
         return meldung;
