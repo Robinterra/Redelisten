@@ -39,4 +39,10 @@ public class UserRepo : IUserRepo
         }
     }
 
+    public User? Retrieve(Guid id)
+    {
+        KeyValuePair<int, User> foundUser = Users.FirstOrDefault(x => x.Value.Token == id);
+
+        return foundUser.Value;
+    }
 }

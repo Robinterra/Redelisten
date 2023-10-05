@@ -7,7 +7,7 @@ public class Meldung
 
     public Meldung(CreateMeldungDto createMeldungDto)
     {
-        UserID = createMeldungDto.UserID;
+        UserID = createMeldungDto.Moderator.Id;
         RedelistenName = createMeldungDto.RedelistenName;
     }
 
@@ -19,5 +19,15 @@ public class Meldung
     public static bool operator !=(Meldung lhs, Meldung rhs)
     {
         return !(lhs == rhs);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }

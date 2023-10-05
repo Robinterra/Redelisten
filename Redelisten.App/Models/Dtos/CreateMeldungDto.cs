@@ -1,6 +1,12 @@
 public class CreateMeldungDto
 {
-    public int UserID { get; set; }
-    public string RedelistenName { get; set; }
+    public User Moderator { get; }
+    public string RedelistenName { get; }
+
+    public CreateMeldungDto(User moderator, string redelistenName)
+    {
+        Moderator = moderator;
+        RedelistenName = redelistenName;
+    }
     
 }
