@@ -3,7 +3,6 @@
     public static List<ICommandLine> EnabledCommandLines
     {
         get;
-        set;
     } = new List<ICommandLine> (  );
 
     public static int Main(string[] args)
@@ -110,6 +109,9 @@
         //Program.EnabledCommandLines.Add ( new UploadNode ( uploadArgs ) );
         //Program.EnabledCommandLines.Add ( new CreateNode ( createArgs ) );
         Program.EnabledCommandLines.Add ( new HelpNode() );
+        Program.EnabledCommandLines.Add ( new HostNode() );
+        Program.EnabledCommandLines.Add ( new RedelisteNode() );
+        Program.EnabledCommandLines.Add ( new UserNode() );
         /*Program.EnabledCommandLines.Add ( new TypeNode() );
         Program.EnabledCommandLines.AddRange(contentArgs);
         Program.EnabledCommandLines.AddRange(createArgs);

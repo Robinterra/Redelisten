@@ -1,5 +1,5 @@
 
-public class HelpNode : ICommandLine, ICommandParent
+public class HostNode: ICommandLine, ICommandParent
 {
 
     // -----------------------------------------------
@@ -12,7 +12,7 @@ public class HelpNode : ICommandLine, ICommandParent
     {
         get
         {
-            return "help";
+            return "host";
         }
     }
 
@@ -22,7 +22,7 @@ public class HelpNode : ICommandLine, ICommandParent
     {
         get
         {
-            return false;
+            return true;
         }
     }
 
@@ -32,7 +32,7 @@ public class HelpNode : ICommandLine, ICommandParent
     {
         get
         {
-            return string.Format (HelpManager.HilfePattern, this.Key, string.Empty, "Print the help in the console" );
+            return string.Format (HelpManager.HilfePattern, this.Key, "<adresse>", "Die Adresse zum Server der Redeliste" );
         }
     }
 
@@ -59,8 +59,7 @@ public class HelpNode : ICommandLine, ICommandParent
     {
         if ($"{this.Key}" == command) return this;
         if ($"--{this.Key}" == command) return this;
-        if ("-h" == command) return this;
-        if ("/?" == command) return this;
+        if ($"-h" == command) return this;
 
         return null;
     }
@@ -75,5 +74,4 @@ public class HelpNode : ICommandLine, ICommandParent
     #endregion methods
 
     // -----------------------------------------------
-
 }
