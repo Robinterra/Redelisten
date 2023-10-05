@@ -1,3 +1,6 @@
+
+using System.Collections;
+
 public class RedelisteRepo : IRedelisteRepo
 {
 
@@ -20,8 +23,22 @@ public class RedelisteRepo : IRedelisteRepo
         return Redelisten.TryGetValue(name, out var value) ? value : null;
     }
 
-    public bool Delete(string name)
+    public Redeliste? Delete(string name)
     {
-        return Redelisten.Remove(name);
+        Redeliste? deletedRedeliste = Retrieve(name);
+        Redelisten.Remove(name);
+        return deletedRedeliste;
+    }
+    
+    public List<Redeliste> Delete(List<User> moderator)
+    {
+        List<Redeliste> deletedRedelisten = new List<Redeliste>();
+        IEnumerable toDelete = Redelisten.Where(t => moderator.Contains(t.Value.Moderator));
+        foreach (KeyValuePair<string, Redeliste> redeliste in toDelete)
+        {
+            deletedRedelisten.Add(redeliste.Value);
+            Redelisten.Remove(redeliste.Key);
+        }
+        return deletedRedelisten;
     }
 }

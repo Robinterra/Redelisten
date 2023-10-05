@@ -1,6 +1,5 @@
 public class CreateRedelisteDto
 {
     public string Name { get; set; } = "";
-
-    public int ModeratorID { get; set; }
+    public User Moderator { get; set; } = null!;
 }

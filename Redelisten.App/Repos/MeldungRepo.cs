@@ -1,3 +1,5 @@
+using System.Collections;
+
 public class MeldungRepo : IMeldungRepo
 {
     private Dictionary<string, List<Meldung>> Meldungen = new Dictionary<string, List<Meldung>>();
@@ -25,10 +27,30 @@ public class MeldungRepo : IMeldungRepo
 
         return new List<Meldung>();
     }
-
+    public bool Delete(List<User> users)
+    {
+        bool result = false;
+        foreach (KeyValuePair<string, List<Meldung>> keyValuePair in Meldungen)
+        {
+            foreach (Meldung meldung in keyValuePair.Value)
+            {
+                 if (users.Any(t => t.Id == meldung.UserID))
+                 {
+                     result = keyValuePair.Value.Remove(meldung);
+                 }
+            }
+        }
+        return result;
+    }
     public bool Delete(Meldung meldung)
     {
         return Meldungen.TryGetValue(meldung.RedelistenName, out var value)
                && value.Remove(meldung);
     }
+
+    public bool DeleteFromRedeliste(string nameRedeliste)
+    {
+        return Meldungen.Remove(nameRedeliste);
+    }
+    
 }
