@@ -6,6 +6,8 @@ public class Redeliste
 
     public Redeliste(CreateRedelisteDto createRedelisteDto)
     {
+        if (createRedelisteDto.Moderator is null) throw new ArgumentNullException(nameof(createRedelisteDto.Moderator));
+
         this.Name = createRedelisteDto.Name;
         this.CreatedAt = DateTime.UtcNow;
         this.Moderator = createRedelisteDto.Moderator;

@@ -32,13 +32,41 @@
     {
         if (commands.Count == 0) return Program.HelpPrinten() == 1;
 
-        ICommandLine firstCommand = commands[0];
+        string? host = null;
+        string? user = null;
+        string? redeliste = null;
+        //@todo der nutzer soll es einstellen können
+        bool ignoreCertificateErrors = true;
 
-        if (firstCommand is HelpNode) return Program.HelpPrinten (  ) == 1;
+        foreach (ICommandLine command in commands)
+        {
+            if (command is HelpNode) return Program.HelpPrinten() == 1;
+            if (command is HostNode h) host = h.Value;
+            if (command is UserNode u) user = u.Value;
+            if (command is RedelisteNode r) redeliste = r.Value;
+        }
 
-        Console.Error.WriteLine ( "please enter a allowd argument first" );
+        if (string.IsNullOrEmpty(host))
+        {
+            Console.Error.WriteLine ( "please enter a host" );
+            return false;
+        }
+        if (string.IsNullOrEmpty(user))
+        {
+            Console.Error.WriteLine ( "please enter a user" );
+            return false;
+        }
+        if (string.IsNullOrEmpty(redeliste))
+        {
+            Console.Error.WriteLine ( "please enter a redeliste" );
+            return false;
+        }
 
-        return false;
+        ConnectionInfo connection = new ConnectionInfo ( user, redeliste, host, ignoreCertificateErrors );
+        RedelisteService redelisteService = new RedelisteService ( connection );
+        redelisteService.Run (  ).Wait (  );
+
+        return true;
     }
 
     /*private static Task<bool> Create(List<ICommandLine> commands)
