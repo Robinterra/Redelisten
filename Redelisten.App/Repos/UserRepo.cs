@@ -8,8 +8,10 @@ public class UserRepo : IUserRepo
 
     }
 
-    public User Create(CreateUserDto createUserDto)
+    public User? Create(CreateUserDto createUserDto)
     {
+        if (this.Users.Any(t=>t.Value.Name == createUserDto.Name)) return null;
+
         User user = new User(createUserDto, counter++);
 
         this.Users.Add(user.Id, user);

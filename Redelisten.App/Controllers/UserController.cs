@@ -16,7 +16,8 @@ public class UserController : ControllerBase
     [HttpPost("create")]
     public IActionResult Create(CreateUserDto createUserDto)
     {
-        User user = this.userRepo.Create(createUserDto);
+        User? user = this.userRepo.Create(createUserDto);
+        if (user is null) return this.Conflict("User already exists");
 
         this.Response.Cookies.Append("token", user.Token.ToString());
 
