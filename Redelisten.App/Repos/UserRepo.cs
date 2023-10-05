@@ -1,7 +1,7 @@
 public class UserRepo : IUserRepo
 {
     private int counter = 0;
-    public Dictionary<int, User> Users { get; set; } = new Dictionary<int, User>();
+    private Dictionary<int, User> Users { get; set; } = new Dictionary<int, User>();
 
     public UserRepo()
     {

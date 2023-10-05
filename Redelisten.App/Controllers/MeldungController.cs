@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Redelisten.App.Interfaces;
 
 [ApiController]
 [Route("Redeliste/{redelisteName}/[controller]")]
@@ -6,14 +7,15 @@ public class MeldungController : ControllerBase
 {
     private readonly ILiveService<LiveHub> hubContext;
     private readonly IMeldungRepo meldungRepo;
-
+    private IMeldungHistoryRepo meldungHistoryRepo;
     private readonly IRedelisteRepo redelisteRepo;
     private readonly IUserRepo userRepo;
 
-    public MeldungController(ILiveService<LiveHub> hubContext, IMeldungRepo meldungRepo, IRedelisteRepo redelisteRepo, IUserRepo userRepo)
+    public MeldungController(ILiveService<LiveHub> hubContext, IMeldungRepo meldungRepo, IMeldungHistoryRepo meldungHistoryRepo, IRedelisteRepo redelisteRepo, IUserRepo userRepo)
     {
         this.hubContext = hubContext;
         this.meldungRepo = meldungRepo;
+        this.meldungHistoryRepo = meldungHistoryRepo;
         this.redelisteRepo = redelisteRepo;
         this.userRepo = userRepo;
     }
@@ -35,4 +37,12 @@ public class MeldungController : ControllerBase
 
         return Ok(result);
     }
+
+    private void IncreaseHistoryCount(int userId, string redelisteName)
+    {
+        if (meldungHistoryRepo.Retrieve(userId, redelisteName) is null)
+            meldungHistoryRepo.Create(userId, redelisteName);
+        meldungHistoryRepo.IncreaseCount(userId, redelisteName);
+    }
+    
 }
