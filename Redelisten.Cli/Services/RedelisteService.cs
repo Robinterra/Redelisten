@@ -42,6 +42,7 @@ public class RedelisteService
 
             ApiResponse response = (await this.ApiClient.GetAsync<ApiResponse>("User"))!;
             isalreadyExist = response.HttpCode == 200;
+            if (!isalreadyExist) cookie.Expired = true;
         }
 
         if (!isalreadyExist)
@@ -57,7 +58,8 @@ public class RedelisteService
 
         HttpResponseMessage message = await ApiClient.client.PostAsJsonAsync("Redeliste/Create", new{name=ConnectionInfo.Redeliste});
         if (message.StatusCode == HttpStatusCode.Created) Console.WriteLine("Du bist Moderator");
-        if (message.StatusCode == HttpStatusCode.OK) Console.WriteLine("Redeliste Erfolgreich beigetreten");
+        else if (message.StatusCode == HttpStatusCode.OK) Console.WriteLine("Redeliste Erfolgreich beigetreten");
+        else CriticalError(message.Content.ReadAsStringAsync().Result);
 
         await this.WebSocketStart();
     }

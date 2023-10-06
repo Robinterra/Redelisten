@@ -82,11 +82,11 @@ public class MeldungController : ControllerBase
         Meldung? nextMeldung = meldungen.FirstOrDefault();
         if (nextMeldung is null)
         {
-            hubContext.Send("KeineMeldung_{currentMeldung.RedelistenName}", "null");
+            hubContext.Send($"KeineMeldung_{currentMeldung.RedelistenName}", "null");
             return Ok(null);
         }
 
-        hubContext.Send("CurrentMeldung", new MeldungReport(user.Name));
+        hubContext.Send($"CurrentMeldung_{currentMeldung.RedelistenName}", new MeldungReport(user.Name));
         return Ok(nextMeldung);
     }
 
