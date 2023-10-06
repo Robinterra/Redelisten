@@ -82,16 +82,16 @@ public class MeldungController : ControllerBase
         UpdateHistory(currentMeldung);
         meldungen.Remove(currentMeldung);
         meldungRepo.Delete(currentMeldung);
-        hubContext.Send("DoneMeldung", currentMeldung);
+        hubContext.Send($"DoneMeldung_{currentMeldung.RedelistenName}", currentMeldung);
 
         Meldung? nextMeldung = meldungen.FirstOrDefault();
         if (nextMeldung is null)
         {
-            hubContext.Send("KeineMeldung", "null");
+            hubContext.Send($"KeineMeldung_{currentMeldung.RedelistenName}", "null");
             return Ok(null);
         }
 
-        hubContext.Send("CurrentMeldung", new MeldungReport(user.Name));
+        hubContext.Send($"CurrentMeldung_{currentMeldung.RedelistenName}", new MeldungReport(user.Name));
         return Ok(nextMeldung);
     }
 

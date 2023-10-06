@@ -13,6 +13,18 @@ public class UserController : ControllerBase
         this.userRepo = userRepo;
     }
 
+    [HttpGet]
+    public IActionResult Get()
+    {
+        if (!this.Request.Cookies.TryGetValue("token", out string? token)) return Unauthorized("Nicht angemeldet");
+        if (!Guid.TryParse(token, out Guid tokenGuid)) return Unauthorized("Nicht angemeldet");
+
+        User? user = userRepo.Retrieve(tokenGuid);
+        if (user is null) return Unauthorized("Nicht angemeldet");
+
+        return this.Ok(user);
+    }
+
     [HttpPost("create")]
     public IActionResult Create(CreateUserDto createUserDto)
     {
@@ -20,6 +32,7 @@ public class UserController : ControllerBase
         if (user is null) return this.Conflict(new { status = "User already exists" });
 
         this.Response.Cookies.Append("token", user.Token.ToString());
+        this.Response.Cookies.Append("user-id", user.Id.ToString());
 
         return this.Ok(user);
     }

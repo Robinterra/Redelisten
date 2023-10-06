@@ -62,6 +62,8 @@
             return false;
         }
 
+        while (host[host.Length - 1] == '/') host = host.Substring(0, host.Length - 1);
+
         ConnectionInfo connection = new ConnectionInfo ( user, redeliste, host, ignoreCertificateErrors );
         RedelisteService redelisteService = new RedelisteService ( connection );
         redelisteService.Run (  ).Wait (  );
