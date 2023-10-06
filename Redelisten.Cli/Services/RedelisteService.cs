@@ -34,8 +34,25 @@ public class RedelisteService
 
     private async Task StartConnection()
     {
-        ApiResponse response = (await this.ApiClient.PostAsync<ApiResponse, dynamic>(new{name=ConnectionInfo.User}, "User/Create"))!;
-        if (response.HttpCode == 409) CriticalError("User already exists");
+        bool isalreadyExist = File.Exists(".cookie");
+        if (isalreadyExist)
+        {
+            Cookie cookie = new Cookie("token", File.ReadAllText(".cookie"), null, this.ApiClient.client.BaseAddress!.Host);
+            this.ApiClient.handler.CookieContainer.Add(cookie);
+
+            //ApiResponse response = (await this.ApiClient.GetAsync<ApiResponse>("User/Me"))!;
+        }
+
+        if (!isalreadyExist)
+        {
+            ApiResponse response = (await this.ApiClient.PostAsync<ApiResponse, dynamic>(new{name=ConnectionInfo.User}, "User/Create"))!;
+            if (response.HttpCode == 409) CriticalError("User already exists");
+
+            Cookie? cookie = this.ApiClient.handler.CookieContainer.GetCookies(new Uri(this.ConnectionInfo.Host)).FirstOrDefault(t=>t.Name == "token");
+            if (cookie is null) CriticalError("Cookie wurde nicht gefunden");
+
+            File.WriteAllText($".cookie", cookie!.Value);
+        }
 
         HttpResponseMessage message = await ApiClient.client.PostAsJsonAsync("Redeliste/Create", new{name=ConnectionInfo.Redeliste});
         if (message.StatusCode == HttpStatusCode.Created) Console.WriteLine("Du bist Moderator");
@@ -47,6 +64,7 @@ public class RedelisteService
     private async Task WebSocketStart()
     {
         HubConnectionBuilder builder = new HubConnectionBuilder();
+
         builder.WithAutomaticReconnect();
         builder.WithUrl($"{this.ConnectionInfo.Host}/LiveInfos", InitSignalrConnection);
 
