@@ -48,10 +48,10 @@ public class MeldungController : ControllerBase
         if (user is null) return Unauthorized("Nicht angemeldet");
 
         Meldung? result = meldungRepo.Create(new(user, redelisteName));
-        if (result is null) return BadRequest("Meldung konnte nicht erstellt werden");
+        if (result is null) return BadRequest("Du meldest dich bereits");
 
         List<Meldung> meldungen = meldungRepo.Retrieve(redelisteName);
-        bool isok = meldungen.Count == 1 ? hubContext.Send("CurrentMeldung", new MeldungReport(user.Name)) : hubContext.Send("NeueMeldung", new MeldungReport(user.Name));
+        bool isok = meldungen.Count == 1 ? hubContext.Send($"CurrentMeldung_{redelisteName}", new MeldungReport(user.Name)) : hubContext.Send("NeueMeldung", new MeldungReport(user.Name));
 
         IncreaseHistoryCount(user.Id, redelisteName);
 
@@ -77,12 +77,12 @@ public class MeldungController : ControllerBase
 
         meldungen.Remove(currentMeldung);
         meldungRepo.Delete(currentMeldung);
-        hubContext.Send("DoneMeldung", currentMeldung);
+        hubContext.Send($"DoneMeldung_{currentMeldung.RedelistenName}", currentMeldung);
 
         Meldung? nextMeldung = meldungen.FirstOrDefault();
         if (nextMeldung is null)
         {
-            hubContext.Send("KeineMeldung", "null");
+            hubContext.Send("KeineMeldung_{currentMeldung.RedelistenName}", "null");
             return Ok(null);
         }
 

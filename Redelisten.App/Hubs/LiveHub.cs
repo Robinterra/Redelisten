@@ -27,7 +27,9 @@ public class LiveHub : Hub
         //string username = userAuthService.GetUsername();
         string connectionId = this.Context.ConnectionId;
 
-        LivestreamSubscribe subscribe = new LivestreamSubscribe(connectionId, "HIER KOMMT REDELISTENAME");
+        this.Context.GetHttpContext()!.Request.Cookies.TryGetValue("redeliste", out string? redeliste);
+
+        LivestreamSubscribe subscribe = new LivestreamSubscribe(connectionId, redeliste!);
         this.livestreamSubscribeRepo.Add(subscribe);
 
         return base.OnConnectedAsync();

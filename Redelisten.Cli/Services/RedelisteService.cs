@@ -72,17 +72,17 @@ public class RedelisteService
 
         await connection.StartAsync();
 
-        connection.On<MeldungReport>("NeueMeldung", param => {
+        connection.On<MeldungReport>($"NeueMeldung_{this.ConnectionInfo.Redeliste}", param => {
             Console.WriteLine($"Der User {param.User} wurde mit auf die Redeliste aufgenommen");
             Console.Write("> ");
         });
 
-        connection.On<MeldungReport>("CurrentMeldung", param => {
+        connection.On<MeldungReport>($"CurrentMeldung_{this.ConnectionInfo.Redeliste}", param => {
             Console.WriteLine($"Der User {param.User} ist jetzt dran");
             Console.Write("> ");
         });
 
-        connection.On<string>("KeineMeldung", param => {
+        connection.On<string>($"KeineMeldung_{this.ConnectionInfo.Redeliste}", param => {
             Console.WriteLine($"Es gibt keine weiteren Meldungen");
             Console.Write("> ");
         });
