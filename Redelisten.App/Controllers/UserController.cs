@@ -20,6 +20,7 @@ public class UserController : ControllerBase
         if (user is null) return this.Conflict(new { status = "User already exists" });
 
         this.Response.Cookies.Append("token", user.Token.ToString());
+        this.Response.Cookies.Append("user-id", user.Id.ToString());
 
         return this.Ok(user);
     }
