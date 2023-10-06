@@ -4,70 +4,78 @@
       <form (ngSubmit)="onSubmit()" #attendeeForm="ngForm">
         <div class="form-group">
           <label for="cookieId">CookieId</label>
-          <input type="text" class="form-control" cookieId="cookieId"
+          <input type="text" class="form-control" id="cookieId"
                  required
-                 [(ngModel)]="model.name" name="name"
-                 #name="ngModel">
-          <div [hidden]="name.valid || name.pristine"
-               class="alert alert-danger">
-            Name is required
+                 [(ngModel)]="model.cookieId" cookieId="cookieId"
+                 #cookieId="ngModel">
+        </div>
+  
+        <div class="form-group">
+          <label for="name">User Name</label>
+          <input type="text" class="form-control" id="name"
+                 [(ngModel)]="model.name" name="name">
+          
+          <!--
+                 <div [hidden]="name.valid || name.pristine"
+                 class="alert alert-danger">
+              Name is required
           </div>
+          -->
         </div>
   
         <div class="form-group">
-          <label for="alterEgo">Alter Ego</label>
-          <input type="text" class="form-control" id="alterEgo"
-                 [(ngModel)]="model.alterEgo" name="alterEgo">
-        </div>
-  
-        <div class="form-group">
-          <label for="power">Hero Power</label>
-          <select class="form-control" id="power"
+          <label for="adminStatus">Admin Status</label>
+          <select class="form-control" id="adminStatus"
                   required
-                  [(ngModel)]="model.power" name="power"
-                  #power="ngModel">
-            <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+                  [(ngModel)]="model.adminStatus" name="adminStatus"
+                  #padminStatus="ngModel">
+            <option *ngFor="let astat of adminStatuses" [value]="astat">{{astat}}</option>
           </select>
-          <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
-            Power is required
+          <!--
+          <div [hidden]="adminStatus.valid" 
+            
+           class="alert alert-danger">
+            Admin Status is required
           </div>
+          -->
         </div>
   
-        <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
-        <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
+        <button type="submit" class="btn btn-success" [disabled]="!attendeeForm.form.valid">Submit</button>
+        <!--
+        <button type="button" class="btn btn-default" (click)="newAttendee(); attendeeForm.reset()">New Attendee</button>
         <em>with</em> reset
   
         &nbsp;&nbsp;
-        <button type="button" class="btn btn-default" (click)="newHero()">New Hero</button>
+        <button type="button" class="btn btn-default" (click)="newAttendee()">New Attendee</button>
         <em>without</em> reset
-  
-       <!-- NOT SHOWN IN DOCS -->
+          -->
+       <!-- NOT SHOWN IN DOCS
         <div>
           <hr>
-          Name via form.controls = {{showFormControls(heroForm)}}
+          Name via form.controls = {{showFormControls(attendeeForm)}}
         </div>
-       <!-- - -->
+       -->
       </form>
     </div>
   
     <div [hidden]="!submitted">
       <h2>You submitted the following:</h2>
       <div class="row">
-        <div class="col-xs-3">Name</div>
+        <div class="col-xs-3">CookieId</div>
+        <div class="col-xs-9">{{ model.cookieId }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">User Name</div>
         <div class="col-xs-9">{{ model.name }}</div>
       </div>
       <div class="row">
-        <div class="col-xs-3">Alter Ego</div>
-        <div class="col-xs-9">{{ model.alterEgo }}</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3">Power</div>
-        <div class="col-xs-9">{{ model.power }}</div>
+        <div class="col-xs-3">Admin Status</div>
+        <div class="col-xs-9">{{ model.adminStatus }}</div>
       </div>
       <br>
       <button type="button" class="btn btn-primary" (click)="submitted=false">Edit</button>
     </div>
-  </div>
+</div>
   
   <!-- ====================================================  -->
     <div>
@@ -79,7 +87,7 @@
     </div>
   
   <!-- ====================================================  -->
-  <hr>
+<hr>
   <style>
     .no-style .ng-valid {
     border-left: 1px  solid #CCC
@@ -88,77 +96,4 @@
     .no-style .ng-invalid {
     border-left: 1px  solid #CCC
   }
-  </style>
-  <div class="no-style" style="margin-left: 4px">
-    <div class="container">
-        <h1>Hero Form</h1>
-        <form>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required>
-          </div>
-  
-          <div class="form-group">
-            <label for="alterEgo">Alter Ego</label>
-            <input type="text" class="form-control" id="alterEgo">
-          </div>
-  
-          <div class="form-group">
-            <label for="power">Hero Power</label>
-            <select class="form-control" id="power" required>
-              <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-            </select>
-          </div>
-  
-          <button type="submit" class="btn btn-success">Submit</button>
-  
-        </form>
-    </div>
-  
-    <!-- ====================================================  -->
-    <hr>
-    <div class="container">
-        <h1>Hero Form</h1>
-        <form #heroForm="ngForm">
-          {{ model | json }}
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name"
-                   required
-                   [(ngModel)]="model.name" name="name">
-          </div>
-  
-          <div class="form-group">
-            <label for="alterEgo">Alter Ego</label>
-            <input type="text"  class="form-control" id="alterEgo"
-                   [(ngModel)]="model.alterEgo" name="alterEgo">
-          </div>
-  
-          <div class="form-group">
-            <label for="power">Hero Power</label>
-            <select class="form-control"  id="power"
-                    required
-                    [(ngModel)]="model.power" name="power">
-              <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-            </select>
-          </div>
-  
-          <button type="submit" class="btn btn-success">Submit</button>
-  
-        </form>
-    </div>
-  
-    <!-- EXTRA MATERIAL FOR DOCUMENTATION -->
-    <hr>
-      <input type="text" class="form-control" id="name"
-             required
-             [(ngModel)]="model.name" name="name">
-      TODO: remove this: {{model.name}}
-    <hr>
-      <input type="text" class="form-control" id="name"
-             required
-             [ngModel]="model.name" name="name"
-             (ngModelChange)="model.name = $event">
-      TODO: remove this: {{model.name}}
-  </div>
-  
+</style>

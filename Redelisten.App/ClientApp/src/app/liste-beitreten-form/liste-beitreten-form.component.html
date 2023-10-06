@@ -1,0 +1,47 @@
+<div class="container">
+    <div [hidden]="submitted">
+      <h1>Liste beitreten</h1>
+      <form (ngSubmit)="onSubmit()" #listeBeitretenForm="ngForm">
+        <div class="form-group">
+          <label for="name">Listenname</label>
+          <input type="text" class="form-control" id="name"
+                 required
+                 [(ngModel)]="model.name" name="name"
+                 #name="ngModel">
+        </div>
+  
+        <button type="submit" class="btn btn-success" [disabled]=false>Beitreten</button>
+      </form>
+    </div>
+  
+    <div [hidden]="!submitted">
+      <h2>You submitted the following:</h2>
+      <div class="row">
+        <div class="col-xs-3">User Name</div>
+        <div class="col-xs-9">{{ model.name }}</div>
+      </div>
+      <br>
+      <button type="button" class="btn btn-primary" (click)="submitted=false">Edit</button>
+    </div>
+</div>
+  
+  <!-- ====================================================  -->
+    <div>
+      <form>
+  
+         <!-- ... all of the form ... -->
+  
+      </form>
+    </div>
+  
+  <!-- ====================================================  -->
+<hr>
+  <style>
+    .no-style .ng-valid {
+    border-left: 1px  solid #CCC
+  }
+  
+    .no-style .ng-invalid {
+    border-left: 1px  solid #CCC
+  }
+</style>

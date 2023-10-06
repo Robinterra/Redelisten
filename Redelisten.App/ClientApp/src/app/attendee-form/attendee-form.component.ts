@@ -9,6 +9,8 @@ import { Attendee } from '../attendee';
 })
 
 export class AttendeeFormComponent {
+
+  adminStatuses = [true, false];
   
   model = new Attendee('18', 'Dr. IQ', true);
 
@@ -18,6 +20,11 @@ export class AttendeeFormComponent {
 
   newAttendee() {
     this.model = new Attendee('42', 'test', true);
+  }
+
+  showFormControls(form: any) {
+    return form && form.controls.name &&
+    form.controls.name.value;
   }
 
 }
