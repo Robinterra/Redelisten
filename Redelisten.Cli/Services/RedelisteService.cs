@@ -40,7 +40,8 @@ public class RedelisteService
             Cookie cookie = new Cookie("token", File.ReadAllText(".cookie"), null, this.ApiClient.client.BaseAddress!.Host);
             this.ApiClient.handler.CookieContainer.Add(cookie);
 
-            //ApiResponse response = (await this.ApiClient.GetAsync<ApiResponse>("User/Me"))!;
+            ApiResponse response = (await this.ApiClient.GetAsync<ApiResponse>("User"))!;
+            isalreadyExist = response.HttpCode == 200;
         }
 
         if (!isalreadyExist)
