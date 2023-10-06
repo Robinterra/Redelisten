@@ -9,9 +9,9 @@ public class Meldung
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public Meldung(CreateMeldungDto createMeldungDto, int newOrder)
+    public Meldung(CreateMeldungDto createMeldungDto, User user, int newOrder)
     {
-        UserID = createMeldungDto.Moderator.Id;
+        UserID = user.Id;
         RedelistenName = createMeldungDto.RedelistenName;
         Order = newOrder;
     }

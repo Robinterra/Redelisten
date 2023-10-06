@@ -1,11 +1,11 @@
 public class CreateMeldungDto
 {
-    public User Moderator { get; }
     public string RedelistenName { get; }
+     
+    public int Type { get; set; }
 
-    public CreateMeldungDto(User moderator, string redelistenName)
+    public CreateMeldungDto(string redelistenName)
     {
-        Moderator = moderator;
         RedelistenName = redelistenName;
     }
     

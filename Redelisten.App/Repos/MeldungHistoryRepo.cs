@@ -25,6 +25,11 @@ public class MeldungHistoryRepo : IMeldungHistoryRepo
         return MeldungHistories.Find(t => t.UserId == userId && t.RedelisteName == redelisteName);
     }
 
+    public MeldungHistory? Retrieve(Meldung meldung)
+    {
+        return Retrieve(meldung.UserID, meldung.RedelistenName);
+    }
+
     public int IncreaseCount(MeldungHistory  meldungsHistory)
     {
         meldungsHistory.MeldungCount++;

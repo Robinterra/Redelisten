@@ -58,7 +58,8 @@ public class RedelisteController : ControllerBase
     private List<User> LoadMeldungen(Redeliste redeliste)
     {
         var meldungen = meldungRepo.Retrieve(redeliste.Name);
-        IEnumerable<User> users = meldungen.Select(meldung => userRepo.Retrieve(meldung.UserID)).OfType<User>();
+        IEnumerable<User> users = meldungen.OrderBy(m => m.Order).
+            Select(meldung => userRepo.Retrieve(meldung.UserID)).OfType<User>();
         return users.ToList();
     }
 }

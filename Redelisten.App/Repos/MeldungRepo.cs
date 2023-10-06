@@ -13,19 +13,7 @@ public class MeldungRepo : IMeldungRepo
         return true;
     }
 
-    private List<Meldung> NewOrdering(List<Meldung> meldungen)
-    {
-        List<Meldung> result = meldungen.OrderByDescending(meldung => meldung.Order).ToList();
-
-        for (int i = 0; i < result.Count; i++)
-        {
-            result[i].Order = i;
-        }
-
-        return result;
-    }
-
-    public Meldung? Create(CreateMeldungDto createMeldungDto)
+    public Meldung? Create(CreateMeldungDto createMeldungDto, User user)
     {
         List<Meldung>? meldungen = null;
         if (!Meldungen.TryGetValue(createMeldungDto.RedelistenName, out meldungen))
@@ -34,10 +22,7 @@ public class MeldungRepo : IMeldungRepo
             Meldungen.Add(createMeldungDto.RedelistenName, meldungen);
         }
 
-        int maxOrder = meldungen.Count == 0 ? 0 : meldungen.Max(meldung => meldung.Order);
-        int newOrder = maxOrder + 1;
-
-        Meldung meldung = new Meldung(createMeldungDto, newOrder);
+        Meldung meldung = new Meldung(createMeldungDto, user, int.MaxValue);
         if (this.Contains(meldung)) return null;
 
         Meldungen[meldung.RedelistenName].Add(meldung);
@@ -46,11 +31,12 @@ public class MeldungRepo : IMeldungRepo
     }
 
     public List<Meldung> Retrieve(string redelistenName)
-    {
+    { 
         if (Meldungen.TryGetValue(redelistenName, out var value)) return new List<Meldung>(value);
 
         return new List<Meldung>();
     }
+    
     public bool Delete(List<User> users)
     {
         bool result = false;
