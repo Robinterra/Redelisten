@@ -134,7 +134,7 @@ public class RedelisteService
 
     private async Task Melden()
     {
-        HttpResponseMessage message = await ApiClient.client.PostAsync($"Redeliste/{this.ConnectionInfo.Redeliste}/Meldung", null);
+        HttpResponseMessage message = await ApiClient.client.PostAsJsonAsync($"Redeliste/{this.ConnectionInfo.Redeliste}/Meldung", new { type = 0 });
         if (message.StatusCode == HttpStatusCode.OK)
         {
             Console.WriteLine("Erfolgreich gemeldet");

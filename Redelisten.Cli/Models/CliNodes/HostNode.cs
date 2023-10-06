@@ -12,7 +12,7 @@ public class HostNode: ICommandLine, ICommandParent
     {
         get
         {
-            return "host";
+            return "connect";
         }
     }
 
@@ -59,7 +59,7 @@ public class HostNode: ICommandLine, ICommandParent
     {
         if ($"{this.Key}" == command) return this;
         if ($"--{this.Key}" == command) return this;
-        if ($"-h" == command) return this;
+        if ($"-c" == command) return this;
 
         return null;
     }

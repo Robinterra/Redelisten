@@ -41,8 +41,9 @@ public class MeldungController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult NeueMeldung([FromRoute][FromBody] CreateMeldungDto createMeldungDto)
+    public IActionResult NeueMeldung(string redelisteName, CreateMeldungDto createMeldungDto)
     {
+        createMeldungDto.RedelistenName = redelisteName;
         Redeliste = redelisteRepo.Retrieve(createMeldungDto.RedelistenName); 
         if ( Redeliste is null) return NotFound("Redeliste nicht gefunden");
         if (!this.Request.Cookies.TryGetValue("token", out string? token)) return Unauthorized("Nicht angemeldet");
@@ -52,12 +53,12 @@ public class MeldungController : ControllerBase
         if (User is null) return Unauthorized("Nicht angemeldet");
 
         Meldung? result = meldungRepo.Create(createMeldungDto, User);
-        if (result is null) return BadRequest("Meldung konnte nicht erstellt werden");
+        if (result is null) return BadRequest("Du hast dich bereits gemeldet");
         
         UpdateOrder();
 
         List<Meldung> meldungen = meldungRepo.Retrieve(createMeldungDto.RedelistenName);
-        bool isok = meldungen.Count == 1 ? hubContext.Send("CurrentMeldung", new MeldungReport(User.Name)) : hubContext.Send("NeueMeldung", new MeldungReport(User.Name));
+        bool isok = hubContext.Send($"NeueMeldung_{redelisteName}", new MeldungReport(User.Name));
 
         return Ok(result);
     }
@@ -75,24 +76,31 @@ public class MeldungController : ControllerBase
         if (redeliste.Moderator != user) return Unauthorized("Nicht der Moderator");
 
         List<Meldung> meldungen = meldungRepo.Retrieve(redelisteName);
-        meldungen = meldungen.OrderByDescending(meldung => meldung.Order).ToList();
+        meldungen = meldungen.OrderBy(meldung => meldung.Order).ToList();
         Meldung? currentMeldung = meldungen.FirstOrDefault();
-        if (currentMeldung is null) return NotFound("Keine Meldungen gefunden");
+        if (currentMeldung is null)
+        {
+            hubContext.Send($"KeineMeldung_{redelisteName}", "null");
+            return NotFound("Keine Meldungen gefunden");
+        }
         
         UpdateHistory(currentMeldung);
         meldungen.Remove(currentMeldung);
         meldungRepo.Delete(currentMeldung);
-        hubContext.Send($"DoneMeldung_{currentMeldung.RedelistenName}", currentMeldung);
 
-        Meldung? nextMeldung = meldungen.FirstOrDefault();
+        User meldeUser = userRepo.Retrieve(currentMeldung.UserID)!;
+        hubContext.Send($"CurrentMeldung_{currentMeldung.RedelistenName}", new { User = meldeUser.Name});
+
+        /*Meldung? nextMeldung = meldungen.FirstOrDefault();
         if (nextMeldung is null)
         {
             hubContext.Send($"KeineMeldung_{currentMeldung.RedelistenName}", "null");
             return Ok(null);
         }
 
-        hubContext.Send($"CurrentMeldung_{currentMeldung.RedelistenName}", new MeldungReport(user.Name));
-        return Ok(nextMeldung);
+        return Ok(nextMeldung);*/
+
+        return Ok(currentMeldung);
     }
 
     private void UpdateHistory(Meldung meldung)

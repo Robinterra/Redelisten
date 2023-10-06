@@ -1,8 +1,13 @@
 public class CreateMeldungDto
 {
-    public string RedelistenName { get; }
+    public string RedelistenName { get; set; } = "";
      
     public int Type { get; set; }
+
+    public CreateMeldungDto()
+    {
+        
+    }
 
     public CreateMeldungDto(string redelistenName)
     {

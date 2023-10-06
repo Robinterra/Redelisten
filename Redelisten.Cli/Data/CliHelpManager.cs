@@ -44,8 +44,8 @@ public class HelpManager
     {
         Console.WriteLine ( "Cli Tool fuer die Redelisten, Join eine Redeliste oder erstelle eine und werde zum Moderator" );
         Console.WriteLine ( "Examples:" );
-        Console.WriteLine ( @".\Redelisten.Cli.exe --host https://addresse.com:8080 --user robin --redeliste TreffenHeute" );
-        Console.WriteLine ( @".\Redelisten.Cli.exe -h https://addresse.com:8080 -u robin -l TreffenHeute" );
+        Console.WriteLine ( @".\Redelisten.Cli.exe --connect https://addresse.com:8080 --user robin --redeliste TreffenHeute" );
+        Console.WriteLine ( @".\Redelisten.Cli.exe -c https://addresse.com:8080 -u robin -l TreffenHeute" );
         Console.WriteLine (  );
 
         foreach ( ICommandLine line in this.CommandLines )

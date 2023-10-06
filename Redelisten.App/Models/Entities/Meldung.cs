@@ -8,6 +8,7 @@ public class Meldung
     public int Order { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public bool IsDran { get; set; }
 
     public Meldung(CreateMeldungDto createMeldungDto, User user, int newOrder)
     {
