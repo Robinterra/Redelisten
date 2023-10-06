@@ -7,9 +7,9 @@ public class RedelisteRepo : IRedelisteRepo
     public Dictionary<String, Redeliste> Redelisten { get; set; } = new Dictionary<String, Redeliste>();
 
 
-    public Redeliste? Create(CreateRedelisteDto createRedelisteDto)
+    public Redeliste? Create(CreateRedelisteDto createRedelisteDto, User user)
     {
-        Redeliste redeliste = new Redeliste(createRedelisteDto);
+        Redeliste redeliste = new Redeliste(createRedelisteDto, user);
         if (Redelisten.ContainsKey(redeliste.Name))
             return null;
         

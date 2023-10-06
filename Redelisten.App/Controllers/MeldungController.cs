@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Redelisten.App.Interfaces;
+using Redelisten.App.Models.Entities;
 
 [ApiController]
 [Route("Redeliste/{redelisteName}/[controller]")]
@@ -53,8 +54,6 @@ public class MeldungController : ControllerBase
         List<Meldung> meldungen = meldungRepo.Retrieve(redelisteName);
         bool isok = meldungen.Count == 1 ? hubContext.Send("CurrentMeldung", new MeldungReport(user.Name)) : hubContext.Send("NeueMeldung", new MeldungReport(user.Name));
 
-        IncreaseHistoryCount(user.Id, redelisteName);
-
         return Ok(result);
     }
 
@@ -74,7 +73,8 @@ public class MeldungController : ControllerBase
         meldungen = meldungen.OrderByDescending(meldung => meldung.Order).ToList();
         Meldung? currentMeldung = meldungen.FirstOrDefault();
         if (currentMeldung is null) return NotFound("Keine Meldungen gefunden");
-
+        
+        UpdateHistory(currentMeldung);
         meldungen.Remove(currentMeldung);
         meldungRepo.Delete(currentMeldung);
         hubContext.Send("DoneMeldung", currentMeldung);
@@ -90,11 +90,12 @@ public class MeldungController : ControllerBase
         return Ok(nextMeldung);
     }
 
-    private void IncreaseHistoryCount(int userId, string redelisteName)
+    private void UpdateHistory(Meldung meldung)
     {
-        if (meldungHistoryRepo.Retrieve(userId, redelisteName) is null)
-            meldungHistoryRepo.Create(userId, redelisteName);
-        meldungHistoryRepo.IncreaseCount(userId, redelisteName);
+        MeldungHistory? history = meldungHistoryRepo.Retrieve(meldung.UserID, meldung.RedelistenName);
+        if (history is null)
+            history = meldungHistoryRepo.Create(meldung.UserID, meldung.RedelistenName);
+        meldungHistoryRepo.IncreaseCount(history!);
     }
-    
+
 }

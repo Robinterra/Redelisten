@@ -25,15 +25,10 @@ public class MeldungHistoryRepo : IMeldungHistoryRepo
         return MeldungHistories.Find(t => t.UserId == userId && t.RedelisteName == redelisteName);
     }
 
-    public int IncreaseCount(int userId, string redelisteName)
+    public int IncreaseCount(MeldungHistory  meldungsHistory)
     {
-        MeldungHistory? meldungsHistory = MeldungHistories.Find(t => 
-            t.UserId == userId && t.RedelisteName == redelisteName);
-
-        if (meldungsHistory == null)
-            return 0;
-        
         meldungsHistory.MeldungCount++;
+        meldungsHistory.LetzterBeitrag = DateTime.Now;
 
         return meldungsHistory.MeldungCount;
     }

@@ -7,11 +7,13 @@ public class MeldungHistory
     public string RedelisteName { get; set; }
     public int UserId { get; set; }
     public int MeldungCount { get; set; }
+    public DateTime LetzterBeitrag { get; set; }
 
     public MeldungHistory(int userId, string redelisteName)
     {
-        this.RedelisteName = redelisteName;
-        this.UserId = userId;
-        this.MeldungCount = 0;
+        RedelisteName = redelisteName;
+        UserId = userId;
+        MeldungCount = 0;
+        LetzterBeitrag = DateTime.MinValue;
     }
 }

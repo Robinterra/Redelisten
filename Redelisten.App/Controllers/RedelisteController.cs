@@ -29,9 +29,8 @@ public class RedelisteController : ControllerBase
 
         User? user = userRepo.Retrieve(tokenGuid);
         if (user is null) return Unauthorized("Nicht angemeldet");
-        createRedelisteDto.Moderator = user;
 
-        Redeliste? redeliste = redelisteRepo.Create(createRedelisteDto);
+        Redeliste? redeliste = redelisteRepo.Create(createRedelisteDto, user);
         if (redeliste is null) return Redirect($"/Redeliste/{createRedelisteDto.Name}");
 
         return Created($"/Redeliste/{redeliste.Name}", new { redeliste.Name });
