@@ -9,8 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ListeBeitretenFormComponent } from './liste-beitreten-form/liste-beitreten-form.component';
-import { RedelisteErstellenFormComponent } from './redeliste-erstellen-form/redeliste-erstellen-form.component';
+
+import { RedelisteAuswahlComponent } from './redeliste-auswahl/redeliste-auswahl.component';
 
 @NgModule({
   
@@ -30,8 +30,7 @@ import { RedelisteErstellenFormComponent } from './redeliste-erstellen-form/rede
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ListeBeitretenFormComponent,
-    RedelisteErstellenFormComponent
+    RedelisteAuswahlComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
