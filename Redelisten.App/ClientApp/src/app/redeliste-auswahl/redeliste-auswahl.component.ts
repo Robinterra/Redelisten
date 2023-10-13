@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Redeliste } from '../redeliste';
-
 @Component({
   selector: 'app-redeliste-auswahl',
   templateUrl: './redeliste-auswahl.component.html',
@@ -9,15 +7,16 @@ import { Redeliste } from '../redeliste';
 })
 
 export class RedelisteAuswahlComponent {
-
-  model = new Redeliste('Klaus');
-
+  
+  // model = new RedelisteTeilnahme('Klaus');
+  model = new RedelisteTeilnahme('');
+  
   submitted = false;
 
   onSubmit() { this.submitted = true; }
 
   newRedeliste() {
-    this.model = new Redeliste('Peter');
+    this.model = new RedelisteTeilnahme('Peter');
   }
 
   showFormControls(form: any) {

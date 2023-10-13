@@ -1,4 +1,4 @@
-import { Teilnehmer } from './teilnehmer/teilnehmer';
+import { Teilnehmer } from './teilnehmer';
 
 export const TEILNEHMER: Teilnehmer[] = [
     { id: 12, name: 'Dr. Nice' },
@@ -10,4 +10,4 @@ export const TEILNEHMER: Teilnehmer[] = [
     { id: 18, name: 'Dr. IQ' },
     { id: 19, name: 'Magma' },
     { id: 20, name: 'Tornado' }
-];
+];``

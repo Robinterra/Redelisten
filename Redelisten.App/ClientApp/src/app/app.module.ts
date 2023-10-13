@@ -7,6 +7,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 
 import { RedelisteAuswahlComponent } from './redeliste-auswahl/redeliste-auswahl.component';
+import { RedelisteTeilnahmeComponent } from './redeliste-teilnahme/redeliste-teilnahme.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    RedelisteAuswahlComponent
+    RedelisteAuswahlComponent,
+    RedelisteTeilnahmeComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
