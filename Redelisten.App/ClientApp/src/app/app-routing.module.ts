@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { RedelisteAuswahlComponent } from './redeliste-auswahl/redeliste-auswahl.component';
 import { RedelisteTeilnahmeComponent } from './redeliste-teilnahme/redeliste-teilnahme.component';
 
 const routes: Routes = [
-  { path: 'redelisteAuswahl', component: RedelisteAuswahlComponent },
-  { path: 'redelisteTeilnahme', component: RedelisteTeilnahmeComponent}
+    { path: 'redeliste-auswahl', component: RedelisteAuswahlComponent },
+    { path: 'redeliste-teilnahme', component: RedelisteTeilnahmeComponent},
 ];
 
 @NgModule({

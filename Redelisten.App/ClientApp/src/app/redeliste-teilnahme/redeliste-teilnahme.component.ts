@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
-import { TEILNEHMER } from "../mock-teilnehmer";
+import { Component, OnInit } from "@angular/core";
+
 import { Teilnehmer } from "../teilnehmer";
+import { TeilnehmerService } from "../teilnehmer.service";
 
 @Component({
     selector: 'app-redeliste-teilnahme',
@@ -8,12 +9,17 @@ import { Teilnehmer } from "../teilnehmer";
     styleUrls: ['./redeliste-teilnahme.component.css']
 })
 
-export class RedelisteTeilnahmeComponent {
-    redelisteTeilnehmer = TEILNEHMER;
-    selectedTeilnehmer?: Teilnehmer;
+export class RedelisteTeilnahmeComponent implements OnInit {
+    teilnehmers: Teilnehmer[] = [];
+    
+    constructor(private teilnehmerService: TeilnehmerService) { }
 
-    onSelect(teilnehmer: Teilnehmer): void {
-        this.selectedTeilnehmer = teilnehmer;
+    ngOnInit(): void {
+        this.getTeilnehmers();
+    }
+
+    getTeilnehmers(): void {
+        this.teilnehmerService.getTeilnehmers().subscribe(teilnehmers => this.teilnehmers = teilnehmers);
     }
 
 }

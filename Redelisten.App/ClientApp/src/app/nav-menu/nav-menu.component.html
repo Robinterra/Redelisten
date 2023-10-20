@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <h1>Redelisten</h1>ß
+      <h1>Redelisten</h1>
       <button
         class="navbar-toggler"
         type="button"
@@ -25,16 +25,19 @@
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link text-dark" [routerLink]="['/redelisteAuswahl']">Listenwahl</a>
-            <!--
-              <a routerLink="/redelisteAuswahl">Redeliste Auswahl</a>
-            <a class="nav-link text-dark" [routerLink]="['/redelisteAuswahl']">Redeliste Auswahl</a>
-            -->
+            <a class="nav-link text-dark" [routerLink]="['/redeliste-auswahl']">Listenwahl</a>
           </li>
+
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/redeliste-teilnahme']">Teilnahmen</a>
+          </li>
+
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/anmelden']"
-              >Anmelden</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['/anmelden']" >Anmelden</a>
           </li>
         </ul>
       </div>

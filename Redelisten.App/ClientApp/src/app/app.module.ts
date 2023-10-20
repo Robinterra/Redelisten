@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
-
-import { RedelisteAuswahlComponent } from './redeliste-auswahl/redeliste-auswahl.component';
-import { RedelisteTeilnahmeComponent } from './redeliste-teilnahme/redeliste-teilnahme.component';
+// import { RedelisteAuswahlComponent } from './redeliste-auswahl/redeliste-auswahl.component';
+// import { RedelisteTeilnahmeComponent } from './redeliste-teilnahme/redeliste-teilnahme.component';
+// import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -19,8 +19,9 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    RedelisteAuswahlComponent,
-    RedelisteTeilnahmeComponent
+    // RedelisteAuswahlComponent,
+    // RedelisteTeilnahmeComponent,
+    // MessagesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
