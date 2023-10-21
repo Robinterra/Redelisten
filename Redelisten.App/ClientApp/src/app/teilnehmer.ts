@@ -1,4 +1,6 @@
-export interface Teilnehmer {
-    id: number;
-    name: string;
+export class Teilnehmer {
+    constructor(
+        public id: number,
+        public name: string
+    ) { }
 }

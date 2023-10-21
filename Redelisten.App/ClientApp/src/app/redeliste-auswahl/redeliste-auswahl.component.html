@@ -1,29 +1,24 @@
 <div class="container">
 
     <h1>Liste beitreten</h1>
-    <div class="form-group">
-        <label for="name">Listenname</label>
-        <!--
-        <input type="text" class="form-control" id="name"
-               required
-               [(ngModel)]="model.name" name="name"
-               #name="ngModel">
-          -->
-    </div>
+    <label for="name">Listenname</label>
+    <!--
+    <input id="name" type="text" [formControl]="name">
+    -->
+    <app-redeliste-auswahl-form></app-redeliste-auswahl-form>
+    <p>Value: {{ name.value }}</p>
+    
+    <button type="button" (click)="joinList()">Beitreten</button>
     <!--
     <input type="button" value="Beitreten" [routerLink]="['../redeliste-teilnahme']" class="btn">
     <button [routerLink]="/redeliste-teilnahme">Beitreten</button>
     -->
-    
-
 </div>
   
   <!-- ====================================================  -->
     <div>
       <form>
-  
          <!-- ... all of the form ... -->
-  
       </form>
     </div>
   
