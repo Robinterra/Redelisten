@@ -4,22 +4,21 @@
       <form (ngSubmit)="onSubmit()" #redelisteAuswahlForm="ngForm">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name"
-                 required
-                 [(ngModel)]="model.name" name="name"
-                 #name="ngModel">
+          <input type="text" class="form-control" id="name">
+          <!--
           <div [hidden]="name.valid || name.pristine"
                class="alert alert-danger">
             Name is required
           </div>
+          -->
         </div>
-  
+        <!--
         <div class="form-group">
           <label for="alterEgo">Alter Ego</label>
           <input type="text" class="form-control" id="alterEgo"
                  [(ngModel)]="model.alterEgo" name="alterEgo">
         </div>
-  
+        
         <button type="submit" class="btn btn-success" [disabled]="!redelisteAuswahlForm.form.valid">Submit</button>
         <button type="button" class="btn btn-default" (click)="newTeilnehmer(); redelisteAuswahlForm.reset()">New Hero</button>
         <em>with</em> reset
@@ -27,7 +26,7 @@
         &nbsp;&nbsp;
         <button type="button" class="btn btn-default" (click)="newTeilnehmer()">New Hero</button>
         <em>without</em> reset
-  
+        -->
        <!-- NOT SHOWN IN DOCS -->
         <div>
           <hr>

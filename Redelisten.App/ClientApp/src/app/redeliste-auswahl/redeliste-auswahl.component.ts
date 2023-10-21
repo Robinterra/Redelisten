@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Teilnehmer } from '../teilnehmer';
+// import { FormControl } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
+// import { NgModule } from '@angular/core';
 
-import { RedelisteAuswahlFormComponent } from '../redeliste-auswahl-form/redeliste-auswahl-form.component';
+// import { RedelisteAuswahlFormComponent } from '../redeliste-auswahl-form/redeliste-auswahl-form.component';
 
-import { TeilnehmerService } from '../teilnehmer.service';
-import { Router, RouterModule } from '@angular/router';
+// import { TeilnehmerService } from '../teilnehmer.service';
+// import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-redeliste-auswahl',
@@ -14,10 +17,22 @@ import { Router, RouterModule } from '@angular/router';
 
 export class RedelisteAuswahlComponent {
 
-  name = new FormControl('');
+  // name = new FormControl('');
+  model = new Teilnehmer(11111, 'Hugo');
   
   joinList() {
 
+  }
+
+  submitted = false;
+
+  onSubmit() {
+    this.submitted = true;    
+  }
+
+  showFormControls(form: any) {
+    return form && form.controls.name &&
+    form.controls.name.value;
   }
 
 

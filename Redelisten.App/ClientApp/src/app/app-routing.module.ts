@@ -5,13 +5,18 @@ import { RedelisteTeilnahmeComponent } from './redeliste-teilnahme/redeliste-tei
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
+    { path: '', pathMatch: 'full', redirectTo: 'redeliste-auswahl' },
     { path: 'redeliste-auswahl', component: RedelisteAuswahlComponent },
     { path: 'redeliste-teilnahme', component: RedelisteTeilnahmeComponent},
     { path: '**', component: PagenotfoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes),
+  ],
+  exports: [
+    RouterModule,
+  ]
 })
 export class AppRoutingModule { }
