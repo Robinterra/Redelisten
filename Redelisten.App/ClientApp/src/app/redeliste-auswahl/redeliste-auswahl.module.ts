@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { RedelisteAuswahlRoutingModule } from './redeliste-auswahl-routing.module';
 // import { RedelisteAuswahlFormModule } from '../redeliste-auswahl-form/redeliste-auswahl-form.module';
 import { RedelisteAuswahlComponent } from './redeliste-auswahl.component';
@@ -13,6 +14,7 @@ import { RedelisteAuswahlComponent } from './redeliste-auswahl.component';
         // RedelisteAuswahlFormModule,
         RedelisteAuswahlRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
     ],
     declarations: [
         RedelisteAuswahlComponent,
@@ -20,5 +22,5 @@ import { RedelisteAuswahlComponent } from './redeliste-auswahl.component';
     exports: [
         RedelisteAuswahlComponent,
     ]
-})
+})  s
 export class RedelisteAuswahlModule { }

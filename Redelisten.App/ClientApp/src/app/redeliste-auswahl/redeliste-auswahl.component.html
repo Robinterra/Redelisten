@@ -1,6 +1,6 @@
 <div class="container">
   <div [hidden]="submitted">
-    <h1>Liste beitreten</h1>
+    <h2>Liste beitreten</h2>
     <!--
     <form (ngSubmit)="onSubmit()" #redelisteAuswahlForm="ngForm">
       <div class="form-group">
@@ -9,19 +9,21 @@
       </div>
     </form>
     -->
-    <div class="form-group">
-      <label for="name">Listenname</label>
-      <input type="text" class="form-control" id="name" name="name">
-    </div>
+
+    <form formGroupName="redelisteAuswahlForm">
+      <div class="form-group">
+        <label for="listName">Listenname</label>
+        <input id="listName" type="text" class="form-control" formControlListName="listName">
+        <p>Value: {{ nam.value }}</p>
+      </div>
+      <button type="submit" [disabled]="!redelisteAuswahlForm.valid">Beitreten</button>
     
-  </div>
-  <button type="button" (click)="joinList()">Beitreten</button>
-  
+    </form>
   
     <!--
       <app-redeliste-auswahl-form></app-redeliste-auswahl-form>
-    <input id="name" type="text" [formControl]="name">
-    <app-redeliste-auswahl-form></app-redeliste-auswahl-form>
+      <input id="name" type="text" [formControl]="name">
+      <app-redeliste-auswahl-form></app-redeliste-auswahl-form>
     -->
     
     <!--

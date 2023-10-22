@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Teilnehmer } from '../teilnehmer';
-// import { FormControl } from '@angular/forms';
-// import { FormsModule } from '@angular/forms';
+
+import { FormControl, FormGroup } from '@angular/forms';
 // import { NgModule } from '@angular/core';
 
 // import { RedelisteAuswahlFormComponent } from '../redeliste-auswahl-form/redeliste-auswahl-form.component';
@@ -17,17 +17,32 @@ import { Teilnehmer } from '../teilnehmer';
 
 export class RedelisteAuswahlComponent {
 
-  // name = new FormControl('');
+  redelisteAuswahlForm = new FormGroup({ 
+    listName: new FormControl(''),
+  });
+
+  // TODO: Work on updating the model
+
+  nam = new FormControl('Han');
+
+  updateName() {
+    // this.nam.patchValue(this.redelisteAuswahlForm.value.name);
+    this.nam.setValue('Nancy');
+    // this.nam.setValue('Nancy');
+  }
+
   model = new Teilnehmer(11111, 'Hugo');
   
   joinList() {
-
+    this.updateName();
   }
 
   submitted = false;
 
   onSubmit() {
-    this.submitted = true;    
+    this.updateName();
+    this.submitted = true;
+    //     console.warn(this.redelisteAuswahlForm.value);    
   }
 
   showFormControls(form: any) {
