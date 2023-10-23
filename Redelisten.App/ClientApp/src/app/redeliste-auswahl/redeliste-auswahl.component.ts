@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Teilnehmer } from '../teilnehmer';
 
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 // import { RedelisteTeilnahme } from '../redeliste-teilnahme';
 // import { FormBuilder } from '@angular/forms';
 // import { Validators } from '@angular/forms';
@@ -15,8 +15,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class RedelisteAuswahlComponent {
 
-  redelisteAuswahlForm = new FormGroup({
-    listName: new FormControl(''),
+  redelisteAuswahlForm = new UntypedFormGroup({
+    listName: new UntypedFormControl(''),
   });
   
   /*
