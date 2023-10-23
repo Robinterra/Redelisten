@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { Teilnehmer } from '../teilnehmer';
 
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-// import { RedelisteTeilnahme } from '../redeliste-teilnahme';
-// import { FormBuilder } from '@angular/forms';
-// import { Validators } from '@angular/forms';
-// import { FormArray } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-redeliste-auswahl',
@@ -15,10 +13,21 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
 
 export class RedelisteAuswahlComponent {
 
-  redelisteAuswahlForm = new UntypedFormGroup({
-    listName: new UntypedFormControl(''),
+  redelisteAuswahlForm = this.fb.group({
+    listName: new FormControl(''),
+    // listName: ['', Validators.required],
   });
+
+  constructor(private fb: FormBuilder) { }
+
+  // listName = new FormControl('');
   
+  /*
+  redelisteAuswahlForm = new FormGroup({
+    listName: new FormControl(''),
+  });
+  */
+
   /*
   redelisteAuswahlForm: FormGroup;
   */
@@ -41,16 +50,13 @@ export class RedelisteAuswahlComponent {
   model = new Teilnehmer(11111, 'Hugo');
   
   joinList() {
-    this.redelisteAuswahlForm.setValue({listName: 'Redeliste 1'});
+    // this.redelisteAuswahlForm.setValue({listName: 'Redeliste 1'});
     this.updateName();
-    console.log('2');
   }
 
   submitted = false;
 
   onSubmit() {
-    console.log('1');
-    // this.updateName();
     this.submitted = true; 
   }
 
@@ -82,7 +88,7 @@ export class RedelisteAuswahlComponent {
   };
 
   submitted = false;
-  
+
 
   onSubmit() {
     this.submitted = true;

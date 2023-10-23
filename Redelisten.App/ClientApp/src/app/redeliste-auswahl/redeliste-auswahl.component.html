@@ -1,22 +1,11 @@
-<div class="form">
-
-  <h2>Liste beitreten</h2>
+<div class="container">
   <form [formGroup]="redelisteAuswahlForm">
+    <h2>Liste beitreten</h2>
     <label for="listName">Listenname</label>
-    <input id="listName" type="text" class="form-control" formControlListName="listName">
+    <input id="listName" type="text" formControlName="listName">
     <p>Form Status: {{ redelisteAuswahlForm.status }}</p>
     <button type="submit" (click)="joinList()">Beitreten</button>
   </form>
-
-    <!--
-    <form (ngSubmit)="onSubmit()" #redelisteAuswahlForm="ngForm">
-      <div class="form-group">
-        <label for="name">Listenname</label>
-        <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
-      </div>
-    </form>
-    -->
-
 </div>
 
 <hr>

@@ -1,7 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import { RedelisteAuswahlFormComponent } from '../redeliste-auswahl-form/redeliste-auswahl-form.component';
+// import { RedelisteAuswahlFormComponent } from '../redeliste-auswahl-form/redeliste-auswahl-form.component';
 import { RedelisteAuswahlComponent } from './redeliste-auswahl.component';
 // import {FeatureModule} from '../feature/feature.module';
 
