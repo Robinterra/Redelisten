@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { Teilnehmer } from '../teilnehmer';
 
-import { FormControl, FormGroup } from '@angular/forms';
-// import { NgModule } from '@angular/core';
-
-// import { RedelisteAuswahlFormComponent } from '../redeliste-auswahl-form/redeliste-auswahl-form.component';
-
-// import { TeilnehmerService } from '../teilnehmer.service';
-// import { Router, RouterModule } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+// import { RedelisteTeilnahme } from '../redeliste-teilnahme';
+// import { FormBuilder } from '@angular/forms';
+// import { Validators } from '@angular/forms';
+// import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-redeliste-auswahl',
@@ -17,39 +15,53 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 export class RedelisteAuswahlComponent {
 
-  redelisteAuswahlForm = new FormGroup({ 
+  redelisteAuswahlForm = new FormGroup({
     listName: new FormControl(''),
   });
+  
+  /*
+  redelisteAuswahlForm: FormGroup;
+  */
+  /*
+  redelisteAuswahlForm = this.fb.group({
+    listName: ['', Validators.required],
+    teilnehmerName: [''],
+  });
+  */
 
   // TODO: Work on updating the model
-
-  nam = new FormControl('Han');
+  // nam = new FormControl('Han');
 
   updateName() {
     // this.nam.patchValue(this.redelisteAuswahlForm.value.name);
-    this.nam.setValue('Nancy');
+    // this.nam.setValue('Nancy');
     // this.nam.setValue('Nancy');
   }
 
   model = new Teilnehmer(11111, 'Hugo');
   
   joinList() {
+    this.redelisteAuswahlForm.setValue({listName: 'Redeliste 1'});
     this.updateName();
+    console.log('2');
   }
 
   submitted = false;
 
   onSubmit() {
-    this.updateName();
-    this.submitted = true;
-    //     console.warn(this.redelisteAuswahlForm.value);    
+    console.log('1');
+    // this.updateName();
+    this.submitted = true; 
   }
 
+  /*
   showFormControls(form: any) {
     return form && form.controls.name &&
     form.controls.name.value;
   }
+  */
 
+  // constructor(private fb: FormBuilder) { }
 
   // model = new RedelisteTeilnahme('Klaus');
   /*
@@ -63,14 +75,14 @@ export class RedelisteAuswahlComponent {
     this.model = new RedelisteTeilnahme('Peter');
   }
   */
-  
+
   /*
   btnClick= function () {
     this.router.navigateByUrl('/user');
   };
 
   submitted = false;
-
+  
 
   onSubmit() {
     this.submitted = true;

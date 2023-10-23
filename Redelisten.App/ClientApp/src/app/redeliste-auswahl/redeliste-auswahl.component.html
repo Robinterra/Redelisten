@@ -1,6 +1,13 @@
-<div class="container">
-  <div [hidden]="submitted">
-    <h2>Liste beitreten</h2>
+<div class="form">
+
+  <h2>Liste beitreten</h2>
+  <form [formGroup]="redelisteAuswahlForm">
+    <label for="listName">Listenname</label>
+    <input id="listName" type="text" class="form-control" formControlListName="listName">
+    <p>Form Status: {{ redelisteAuswahlForm.status }}</p>
+    <button type="submit" (click)="joinList()">Beitreten</button>
+  </form>
+
     <!--
     <form (ngSubmit)="onSubmit()" #redelisteAuswahlForm="ngForm">
       <div class="form-group">
@@ -10,26 +17,6 @@
     </form>
     -->
 
-    <form formGroupName="redelisteAuswahlForm">
-      <div class="form-group">
-        <label for="listName">Listenname</label>
-        <input id="listName" type="text" class="form-control" formControlListName="listName">
-        <p>Value: {{ nam.value }}</p>
-      </div>
-      <button type="submit" [disabled]="!redelisteAuswahlForm.valid">Beitreten</button>
-    
-    </form>
-  
-    <!--
-      <app-redeliste-auswahl-form></app-redeliste-auswahl-form>
-      <input id="name" type="text" [formControl]="name">
-      <app-redeliste-auswahl-form></app-redeliste-auswahl-form>
-    -->
-    
-    <!--
-    <input type="button" value="Beitreten" [routerLink]="['../redeliste-teilnahme']" class="btn">
-    <button [routerLink]="/redeliste-teilnahme">Beitreten</button>
-    -->
 </div>
 
 <hr>

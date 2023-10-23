@@ -6,8 +6,6 @@ import { RedelisteAuswahlRoutingModule } from './redeliste-auswahl-routing.modul
 // import { RedelisteAuswahlFormModule } from '../redeliste-auswahl-form/redeliste-auswahl-form.module';
 import { RedelisteAuswahlComponent } from './redeliste-auswahl.component';
 
-
-
 @NgModule({
     imports: [
         CommonModule,
@@ -22,5 +20,5 @@ import { RedelisteAuswahlComponent } from './redeliste-auswahl.component';
     exports: [
         RedelisteAuswahlComponent,
     ]
-})  s
+})  
 export class RedelisteAuswahlModule { }
