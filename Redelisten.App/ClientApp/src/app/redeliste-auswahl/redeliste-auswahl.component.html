@@ -1,10 +1,12 @@
 <div class="container">
-  <form [formGroup]="redelisteAuswahlForm">
+  <form [formGroup]="redelisteAuswahlForm" (ngSubmit)="onSubmit()">
     <h2>Liste beitreten</h2>
-    <label for="listName">Listenname</label>
+    <label for="listName">Listenname:</label>
     <input id="listName" type="text" formControlName="listName">
+    <p>Complete the form to enable button.</p>
     <p>Form Status: {{ redelisteAuswahlForm.status }}</p>
-    <button type="submit" (click)="joinList()">Beitreten</button>
+    <button type="submit" [disabled]="!redelisteAuswahlForm.valid">Beitreten</button>
+    <button type="button" (click)="updateProfile()">Update Profile</button>
   </form>
 </div>
 
@@ -13,7 +15,6 @@
     .no-style .ng-valid {
     border-left: 1px  solid #CCC
   }
-  
     .no-style .ng-invalid {
     border-left: 1px  solid #CCC
   }

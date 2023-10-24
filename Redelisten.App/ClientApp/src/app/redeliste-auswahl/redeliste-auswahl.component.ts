@@ -20,17 +20,16 @@ export class RedelisteAuswahlComponent {
 
   constructor(private fb: FormBuilder) { }
 
-  // listName = new FormControl('');
-  
-  /*
-  redelisteAuswahlForm = new FormGroup({
-    listName: new FormControl(''),
-  });
-  */
+  onSubmit() {
+    console.warn(this.redelisteAuswahlForm.value);
+  }
 
-  /*
-  redelisteAuswahlForm: FormGroup;
-  */
+  updateProfile() {
+    this.redelisteAuswahlForm.patchValue({
+      listName: 'Nancy',
+    });
+  }
+
   /*
   redelisteAuswahlForm = this.fb.group({
     listName: ['', Validators.required],
@@ -41,24 +40,22 @@ export class RedelisteAuswahlComponent {
   // TODO: Work on updating the model
   // nam = new FormControl('Han');
 
+  /*
   updateName() {
-    // this.nam.patchValue(this.redelisteAuswahlForm.value.name);
-    // this.nam.setValue('Nancy');
-    // this.nam.setValue('Nancy');
+    
   }
-
-  model = new Teilnehmer(11111, 'Hugo');
+  */
+  // model = new Teilnehmer(11111, 'Hugo');
   
+  /*
   joinList() {
     // this.redelisteAuswahlForm.setValue({listName: 'Redeliste 1'});
     this.updateName();
   }
+  */
+  // submitted = false;
 
-  submitted = false;
-
-  onSubmit() {
-    this.submitted = true; 
-  }
+  
 
   /*
   showFormControls(form: any) {
