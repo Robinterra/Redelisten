@@ -1,10 +1,9 @@
-form {
-    padding-top: 1rem;
+.no-style .ng-valid {
+    border-left: 1px  solid #CCC;
 }
-  
-label {
-    display: block;
-    margin: .5em 0;
-    font-weight: bold;
+.no-style .ng-invalid {
+    border-left: 1px  solid #CCC;
 }
-  
+.input-margin-bottom {
+    margin-bottom: 10px;
+}
