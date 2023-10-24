@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Teilnehmer } from "../teilnehmer";
 import { TeilnehmerService } from "../teilnehmer.service";
+import { TEILNEHMER } from "../mock-teilnehmer";
 
 @Component({
     selector: 'app-redeliste-teilnahme',
@@ -10,16 +11,18 @@ import { TeilnehmerService } from "../teilnehmer.service";
 })
 
 export class RedelisteTeilnahmeComponent implements OnInit {
-    teilnehmers: Teilnehmer[] = [];
+    teilnehmers: Teilnehmer[] = TEILNEHMER;
     
     constructor(private teilnehmerService: TeilnehmerService) { }
 
     ngOnInit(): void {
-        this.getTeilnehmers();
+        // this.getTeilnehmers();
     }
 
+    /*
     getTeilnehmers(): void {
         this.teilnehmerService.getTeilnehmers().subscribe(teilnehmers => this.teilnehmers = teilnehmers);
     }
+    */
 
 }

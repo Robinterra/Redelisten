@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AppRoutingModule } from './app-routing.module';
-// import { RedelisteAuswahlComponent } from './redeliste-auswahl/redeliste-auswahl.component';
 import { RedelisteAuswahlModule } from './redeliste-auswahl/redeliste-auswahl.module';
+import { RedelisteTeilnahmeComponent } from './redeliste-teilnahme/redeliste-teilnahme.component';
 
 @NgModule({
   imports: [
@@ -18,6 +18,7 @@ import { RedelisteAuswahlModule } from './redeliste-auswahl/redeliste-auswahl.mo
   declarations: [
     AppComponent,
     NavMenuComponent,
+    RedelisteTeilnahmeComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
