@@ -25,4 +25,18 @@ export class RedelisteTeilnahmeComponent implements OnInit {
         this.teilnehmerService.getTeilnehmers().subscribe(teilnehmers => this.teilnehmers = teilnehmers);
     }
 
+    add(name: string): void {
+        name = name.trim();
+        if (!name) { return; }
+        this.teilnehmerService.addTeilnehmer({ name } as Teilnehmer)
+          .subscribe(teilnehmer => {
+            this.teilnehmers.push(teilnehmer);
+          });
+      }
+    
+      delete(teilnehmer: Teilnehmer): void {
+        this.teilnehmers = this.teilnehmers.filter(t => t !== teilnehmer);
+        this.teilnehmerService.deleteTeilnehmer(teilnehmer.id).subscribe();
+      }
+
 }

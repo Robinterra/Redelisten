@@ -5,6 +5,7 @@ import { Teilnehmer } from '../teilnehmer';
 @Injectable({
   providedIn: 'root'
 })
+
 export class InMemoryDataService implements InMemoryDbService {
   
   createDb() {
@@ -28,7 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
   // if the heroes array is not empty, the method below returns the highest
   // hero id + 1.
   genId(teilnehmers: Teilnehmer[]): number {
-    return teilnehmers.length > 0 ? Math.max(...teilnehmers.map(Teilnehmer => Teilnehmer.id)) + 1 : 11;
+    return teilnehmers.length > 0 ? Math.max(...teilnehmers.map(teilnehmer => teilnehmer.id)) + 1 : 11;
   }
 
 }

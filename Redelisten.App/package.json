@@ -1,7 +1,10 @@
 {
   "devDependencies": {
+    "@angular-devkit/build-angular": "^16.2.8",
+    "@angular/compiler-cli": "^16.2.11",
     "run-script-os": "^1.1.6",
-    "ry": "^0.1.0"
+    "ry": "^0.1.0",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "angular-in-memory-web-api": "^0.16.0"
