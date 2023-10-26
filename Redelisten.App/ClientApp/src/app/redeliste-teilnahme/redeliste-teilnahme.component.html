@@ -1,8 +1,12 @@
 <div class="container">
+    <h2>Redeliste:</h2>
     <h2>Teilnehmer</h2>
-    <ul class="redeliste">
-        <li *ngFor="let teilnehmer of teilnehmers">
-            {{teilnehmer.name}}
+    <ul class="list-group list-group-light">
+        <li class="list-group-item px-3 border-0 rounded-3 mb-2"
+            *ngFor="let teilnehmer of teilnehmers; let i = index"
+            [ngClass]="{'list-group-item-success': i === 0, 'list-group-item-secondary': i !== 0}">
+            <span class="name">{{teilnehmer.name}}</span>
         </li>
     </ul>
+    <app-messages></app-messages>
 </div>
