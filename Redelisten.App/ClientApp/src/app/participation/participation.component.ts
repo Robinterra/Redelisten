@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Participant } from "../participant";
 import { ParticipantService } from "../participant.service";
-import { PARTICIPANTS } from "../mock-participants";
+// import { PARTICIPANTS } from "../mock-participants";
 
 @Component({
     selector: 'app-participation',
@@ -11,15 +11,21 @@ import { PARTICIPANTS } from "../mock-participants";
 })
 
 export class ParticipationComponent implements OnInit {
-    participants: Participant[] = PARTICIPANTS;
+
+    // participants: Participant[] = PARTICIPANTS;
+
+    participants: Participant[] = [];
 
     constructor(private participantService: ParticipantService) { }
 
     ngOnInit(): void {
         // this.getTeilnehmers();
+        this.getParticipants();
     }
 
     getParticipants(): void {
+      // this.participants = this.participantService.getParticipants();
+        //
       this.participantService.getParticipants().subscribe(participants => this.participants = this.participants);
     }
 

@@ -6,9 +6,14 @@ import { Participant } from './participant';
 import { PARTICIPANTS } from './mock-participants';
 // import { MessageService } from './message.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
+
 export class ParticipantService {
 
+  constructor() { }
+  // constructor(private messageService: MessageService) { }
   // constructor(private messageService: MessageService) { }
   // constructor(private participantService: ParticipantService) { }
 
