@@ -12,16 +12,33 @@ import { PARTICIPANTS } from './mock-participants';
 
 export class ParticipantService {
 
-  constructor() { }
+  // url = 'http://localhost:3000/locations';
+
+  url = 'http://localhost:3000/participants';
+
+  async getAllParticipants(): Promise<Participant[]> {
+    const data = await fetch(this.url);
+    return await data.json() ?? [];
+  }
+
+  async getParticipantById(id: number): Promise<Participant | undefined> {
+    const data = await fetch(`${this.url}/${id}`);
+    return await data.json() ?? {};
+  }
+
+  // constructor() { }
   // constructor(private messageService: MessageService) { }
   // constructor(private messageService: MessageService) { }
   // constructor(private participantService: ParticipantService) { }
 
+
+  /*
   getParticipants(): Observable<Participant[]> {
     const participants = of(PARTICIPANTS);
     // this.messageService.add('ParticipantService: fetched participant');
     return participants;
   }
+  */
 
   getParticipant(id: number): Observable<Participant> {
     // For now, assume that a hero with the specified `id` always exists.

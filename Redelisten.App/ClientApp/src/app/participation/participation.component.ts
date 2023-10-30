@@ -25,8 +25,10 @@ export class ParticipationComponent implements OnInit {
 
     getParticipants(): void {
       // this.participants = this.participantService.getParticipants();
-        //
-      this.participantService.getParticipants().subscribe(participants => this.participants = this.participants);
+      // this.participantService.getParticipants().subscribe(participants => this.participants = this.participants);
+      this.participantService.getAllParticipants().then((participantsList: Participant[]) => {
+        this.participants = participantsList;
+      });
     }
 
     add(name: string): void {

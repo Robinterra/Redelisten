@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService } from './in-memory-data.service';
 
+// import { InMemoryDataService } from './in-memory-data.service';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,11 +27,6 @@ import { ParticipationComponent } from './participation/participation.component'
     AppRoutingModule,
     SelectionModule,
 
-    /*
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
-    */
     /*
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
