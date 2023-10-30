@@ -1,0 +1,9 @@
+.no-style .ng-valid {
+  border-left: 1px  solid #CCC;
+}
+.no-style .ng-invalid {
+  border-left: 1px  solid #CCC;
+}
+.input-margin-bottom {
+  margin-bottom: 10px;
+}
