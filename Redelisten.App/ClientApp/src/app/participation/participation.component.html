@@ -1,8 +1,24 @@
 <div class="container">
+  <h2>Redeliste:</h2>
   <h2>Teilnehmer</h2>
-  <ul class="redeliste">
-      <li *ngFor="let participant of participants">
-          {{participant.name}}
+  <ul class="list-group list-group-light">
+      <li class="list-group-item px-3 border-0 rounded-3 mb-2"
+          *ngFor="let participant of participants; let i = index"
+          [ngClass]="{'list-group-item-success': i === 0, 'list-group-item-secondary': i !== 0}">
+          <span class="name">{{participant.name}}</span>
+          <button type="button" class="delete" title="delete participant" (click)="delete(participant)">x</button>
       </li>
   </ul>
+  <!--
+  <app-messages></app-messages>
+  -->
+
+  <div>
+      <label for="new-teilnehmer">Teilnehmer name: </label>
+      <input id="new-teilnehmer" #teilnehmerName />
+      <!-- (click) passes input value to add() and then clears the input -->
+      <button type="button" class="add-button" (click)="add(teilnehmerName.value); teilnehmerName.value=''">
+        Add teilnehmer
+      </button>
+  </div>
 </div>

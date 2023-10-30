@@ -25,4 +25,18 @@ export class ParticipantService {
     // this.messageService.add(`ParticipantService: fetched participant id=${id}`);
     return of(participant);
   }
+
+  /** POST: add a new teilnehmer to the server */
+  addTeilnehmer(participant: Participant) {
+
+
+    // const participan = new Participant(1, 'Max Mustermann');
+    /*
+    return this.http.post<Teilnehmer>(this.teilnehmersUrl, teilnehmer, this.httpOptions).pipe(
+      tap((newTeilnehmer: Teilnehmer) => this.log(`added teilnehmer w/ id=${newTeilnehmer.id}`)),
+      catchError(this.handleError<Teilnehmer>('addTeilnehmer'))
+    );
+    */
+  }
+
 }

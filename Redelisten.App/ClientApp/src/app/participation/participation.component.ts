@@ -19,6 +19,27 @@ export class ParticipationComponent implements OnInit {
         // this.getTeilnehmers();
     }
 
+    getParticipants(): void {
+      this.participantService.getParticipants().subscribe(participants => this.participants = this.participants);
+    }
+
+    add(name: string): void {
+      name = name.trim();
+      if (!name) { return; }
+
+      /*
+      this.participantService.addParticipant({ name } as Participant)
+        .subscribe(participant => {
+          this.participants.push(participant);
+        });
+      */
+    }
+
+    delete(participant: Participant): void {
+      // this.teilnehmers = this.teilnehmers.filter(t => t !== teilnehmer);
+      // this.teilnehmerService.deleteTeilnehmer(teilnehmer.id).subscribe();
+    }
+
     /*
     getTeilnehmers(): void {
         this.teilnehmerService.getTeilnehmers().subscribe(teilnehmers => this.teilnehmers = teilnehmers);
