@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -16,12 +16,18 @@ export class ParticipantService {
 
   // url = 'http://localhost:3000/locations';
 
-  url = 'https://eu-central-1.aws.data.mongodb-api.com/app/data-ecyvd/endpoint/data/v1';
+  url = 'https://eu-central-1.aws.data.mongodb-api.com/app/data-ecyvd/endpoint/data/v1/participants';
 
   constructor(private http: HttpClient) { }
 
   getAllParticipants(): Observable<Participant[]> {
-    return this.http.get<Participant[]>(this.url)
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'api-key': '65411a246e1c5dd667f7b433'
+    });
+
+    return this.http.get<Participant[]>(this.url, { headers })
     .pipe(
       tap(data => console.log('Returned data:', data)),
       catchError(error => {
