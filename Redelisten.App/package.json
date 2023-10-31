@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular-in-memory-web-api": "^0.16.0"
+    "angular-in-memory-web-api": "^0.16.0",
+    "mongodb": "^6.2.0"
   }
 }
