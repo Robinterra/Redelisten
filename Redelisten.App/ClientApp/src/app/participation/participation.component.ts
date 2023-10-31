@@ -24,16 +24,24 @@ export class ParticipationComponent implements OnInit {
     }
 
     getParticipants(): void {
-      // this.participants = this.participantService.getParticipants();
+      this.participantService.getAllParticipants().subscribe(participants => this.participants = participants);
+      // this.participants = this.participantService.getAllParticipants();
       // this.participantService.getParticipants().subscribe(participants => this.participants = this.participants);
+      /*
       this.participantService.getAllParticipants().then((participantsList: Participant[]) => {
         this.participants = participantsList;
       });
+      */
     }
 
     add(name: string): void {
       name = name.trim();
-      if (!name) { return; }
+      if (!name) {
+        return;
+      }
+      this.participantService.addParticipant({ name } as Participant).subscribe(participant => {
+        this.participants.push(participant);
+      });
 
       /*
       this.participantService.addParticipant({ name } as Participant)
