@@ -28,11 +28,11 @@ public class MeldungController : ControllerBase
     {
         Redeliste? redeliste = redelisteRepo.Retrieve(redelisteName);
         if (redeliste is null) return NotFound("Redeliste nicht gefunden");
-        if (!this.Request.Cookies.TryGetValue("token", out string? token)) return Unauthorized("Nicht angemeldet");
-        if (!Guid.TryParse(token, out Guid tokenGuid)) return Unauthorized("Nicht angemeldet");
+        //if (!this.Request.Cookies.TryGetValue("token", out string? token)) return Unauthorized("Nicht angemeldet");
+        //if (!Guid.TryParse(token, out Guid tokenGuid)) return Unauthorized("Nicht angemeldet");
 
-        User? user = userRepo.Retrieve(tokenGuid);
-        if (user is null) return Unauthorized("Nicht angemeldet");
+        //User? user = userRepo.Retrieve(tokenGuid);
+        //if (user is null) return Unauthorized("Nicht angemeldet");
 
         List<Meldung> meldungen = meldungRepo.Retrieve(redelisteName);
         meldungen = meldungen.OrderBy(meldung => meldung.Order).ToList();

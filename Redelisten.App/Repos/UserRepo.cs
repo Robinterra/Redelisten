@@ -5,7 +5,11 @@ public class UserRepo : IUserRepo
 
     public UserRepo()
     {
+        User user = new User(new CreateUserDto() { Name = "Admin" }, counter++);
+        User user2 = new User(new CreateUserDto() { Name = "Robin" }, counter++);
 
+        Users.Add(user.Id, user);
+        Users.Add(user2.Id, user2);
     }
 
     public User? Create(CreateUserDto createUserDto)

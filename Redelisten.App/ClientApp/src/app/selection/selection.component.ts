@@ -55,7 +55,7 @@ export class SelectionComponent implements OnInit {
 
   createRedeliste(redeliste: CreateRedeliste) {
     // POST: /api/redeliste/create
-    this.http.post('/redeliste/create', redeliste).subscribe(
+    this.http.post('https://localhost:7260/user/create', redeliste).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     );
@@ -72,3 +72,4 @@ export class SelectionComponent implements OnInit {
 class CreateRedeliste {
   name!: string;
 }
+

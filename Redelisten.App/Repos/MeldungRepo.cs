@@ -4,6 +4,17 @@ public class MeldungRepo : IMeldungRepo
 {
     private Dictionary<string, List<Meldung>> Meldungen = new Dictionary<string, List<Meldung>>();
 
+    public MeldungRepo()
+    {
+        Meldung meldung = new Meldung(new CreateMeldungDto() { RedelistenName = "Test" }, new User(new CreateUserDto() { Name = "Admin" }, 0), int.MaxValue);
+        Meldung meldung2 = new Meldung(new CreateMeldungDto() { RedelistenName = "Test" }, new User(new CreateUserDto() { Name = "Robin" }, 1), int.MaxValue);
+
+        List<Meldung> meldungen = new List<Meldung>();
+        meldungen.Add(meldung);
+        meldungen.Add(meldung2);
+        Meldungen.Add(meldung.RedelistenName, meldungen);
+    }
+
     private bool Contains(Meldung meldung)
     {
         if (!Meldungen.ContainsKey(meldung.RedelistenName)) return false;

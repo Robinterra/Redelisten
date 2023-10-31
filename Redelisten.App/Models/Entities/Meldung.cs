@@ -3,6 +3,7 @@ using Microsoft.VisualBasic.CompilerServices;
 public class Meldung
 {
     public int UserID { get; set; }
+    public string Name { get; set; }
     public string RedelistenName { get; set; }
 
     public int Order { get; set; }
@@ -13,6 +14,7 @@ public class Meldung
     public Meldung(CreateMeldungDto createMeldungDto, User user, int newOrder)
     {
         UserID = user.Id;
+        Name = user.Name;
         RedelistenName = createMeldungDto.RedelistenName;
         Order = newOrder;
     }

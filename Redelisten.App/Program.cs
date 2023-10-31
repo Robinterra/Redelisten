@@ -42,4 +42,12 @@ app.MapControllerRoute(
 
 app.MapFallbackToFile("index.html");;
 
+app.UseCors(t=>
+{
+    t.AllowAnyHeader();
+    t.AllowAnyMethod();
+    t.AllowAnyOrigin();
+    //t.AllowCredentials();
+});
+
 app.Run();

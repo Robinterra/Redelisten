@@ -77,6 +77,10 @@
             "development": {
               "browserTarget": "Redelisten.App:build:development",
               "proxyConfig": "proxy.conf.js"
+            },
+            "options": {
+              "browserTarget": "your-application-name:build",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

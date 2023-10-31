@@ -6,6 +6,13 @@ public class RedelisteRepo : IRedelisteRepo
 
     public Dictionary<String, Redeliste> Redelisten { get; set; } = new Dictionary<String, Redeliste>();
 
+    public RedelisteRepo()
+    {
+        Redeliste redeliste = new Redeliste(new CreateRedelisteDto() { Name = "Test" }, new User(new CreateUserDto() { Name = "Admin" }, 0));
+
+        Redelisten.Add(redeliste.Name, redeliste);
+    }
+
 
     public Redeliste? Create(CreateRedelisteDto createRedelisteDto, User user)
     {

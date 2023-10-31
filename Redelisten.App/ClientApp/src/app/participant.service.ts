@@ -14,7 +14,7 @@ export class ParticipantService {
 
   // url = 'http://localhost:3000/locations';
 
-  url = 'http://localhost:3000/participants';
+  url = 'https://localhost:7260/meldung/test';//test steht für den Namen der Liste
 
   async getAllParticipants(): Promise<Participant[]> {
     const data = await fetch(this.url);
